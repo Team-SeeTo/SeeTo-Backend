@@ -9,7 +9,6 @@ class Comment(EmbeddedDocument):
 class Idea(Document):
     meta = {'collection': 'idea'}
 
-    author = ObjectIdField(required=True)
     title = StringField(required=True)
     body = StringField(required=True)
     created_at = DateTimeField(required=True, default=datetime.now())

@@ -7,7 +7,7 @@ from app.models.quick_memo import QuickMemo
 class UserModel(Document):
     meta = {'collection': 'user'}
 
-    email = StringField(required=True, primary_key=True)
+    email = StringField(required=True, unique=True)
     username = StringField(required=True)
     password = StringField(required=True)
     rank = StringField(required=True)

@@ -20,7 +20,6 @@ class ToDo(Document):
     meta = {'allow_inheritance': True,
             'collection': 'todo'}
 
-    author = ObjectIdField(required=True)
     title = StringField(required=True)
     expiration = DateTimeField(required=True)
     type = IntEnumField(TypeEnum, required=True)
