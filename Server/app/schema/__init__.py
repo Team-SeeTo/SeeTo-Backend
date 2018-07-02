@@ -1,9 +1,8 @@
 import graphene
 from functools import wraps
-from flask_jwt_extended import get_jwt_identity, get_raw_jwt, jwt_required, jwt_refresh_token_required
 from flask_graphql import GraphQLView
-from app.GraphQL.mutations import Mutation
-from app.GraphQL.queries import Query
+from app.schema.mutations import Mutation
+from app.schema.queries import Query
 
 
 class Schema:
