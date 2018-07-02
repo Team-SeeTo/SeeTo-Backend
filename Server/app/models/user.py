@@ -4,7 +4,7 @@ from app.models.idea import Idea
 from app.models.quick_memo import QuickMemo
 
 
-class UserModel(Document):
+class User(Document):
     meta = {'collection': 'user'}
 
     email = StringField(required=True, primary_key=True)
