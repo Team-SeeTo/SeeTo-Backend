@@ -4,7 +4,7 @@ from app.models.idea import Idea
 from app.models.quick_memo import QuickMemo
 
 
-class UserModel(Document):
+class User(Document):
     meta = {'collection': 'user'}
 
     email = StringField(required=True, unique=True)
@@ -16,3 +16,24 @@ class UserModel(Document):
     todo = ListField(GenericReferenceField, default=[])
     ideas = ListField(ReferenceField(Idea), default=[])
     register_on = DateTimeField(required=True, default=datetime.now())
+
+
+class ToDoLog(EmbeddedDocument):
+    todo_create = IntField(required=True, default=0)
+    milestone_complete = IntField(required=True, default=0)
+    todo_complete = IntField(required=True, default=0)
+    total = IntField(required=True, default=0)
+
+
+class IdeasLog(EmbeddedDocument):
+    vote = IntField(required=True, default=0)
+    comment = IntField(required=True, default=0)
+    idea_create = IntField(required=True, default=0)
+    total = IntField(required=True, default=0)
+
+
+class UserLog(Document):
+    user = ReferenceField(document_type=User, required=True)
+    date = DateTimeField(required=True, default=datetime.now())
+    ToDo = EmbeddedDocumentField(document_type=ToDoLog, required=True, default=IdeasLog())
+    Ideas = EmbeddedDocumentField(document_type=IdeasLog, required=True, default=IdeasLog())
