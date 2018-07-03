@@ -1,5 +1,21 @@
 import graphene
 
 
+class TypeEnum(graphene.Enum):
+    INFINITY = 1
+    STANDARD = 2
+    HARD = 3
+
+
+class Milestone(graphene.ObjectType):
+    name = graphene.String()
+    is_completed = graphene.Boolean()
+
+
 class ToDoField(graphene.ObjectType):
-    pass
+    title = graphene.String()
+    type = graphene.Enum(TypeEnum)
+    created_at = graphene.DateTime()
+    milestones = graphene.List(graphene.Field(Milestone))
+    expiration = graphene.DateTime()
+    is_completed = graphene.Boolean()
