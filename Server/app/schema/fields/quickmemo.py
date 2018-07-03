@@ -2,4 +2,5 @@ import graphene
 
 
 class QuickMemoField(graphene.ObjectType):
-    pass
+    title = graphene.String()
+    body = graphene.String()
