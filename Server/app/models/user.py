@@ -22,14 +22,14 @@ class ToDoLog(EmbeddedDocument):
     todo_create = IntField(required=True, default=0)
     milestone_complete = IntField(required=True, default=0)
     todo_complete = IntField(required=True, default=0)
-    total = IntField(required=True, default=0)
+    total_point = IntField(required=True, default=0)
 
 
 class IdeasLog(EmbeddedDocument):
     vote = IntField(required=True, default=0)
     comment = IntField(required=True, default=0)
     idea_create = IntField(required=True, default=0)
-    total = IntField(required=True, default=0)
+    total_point = IntField(required=True, default=0)
 
 
 class UserLog(Document):
