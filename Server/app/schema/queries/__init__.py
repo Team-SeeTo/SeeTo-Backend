@@ -20,7 +20,7 @@ class Query(graphene.ObjectType):
     quick_memo = graphene.List(of_type=QuickMemoField,
                                token=graphene.String())
 
-    time_line = graphene.List(of_type=TimeLimeField,
+    timeline = graphene.List(of_type=TimeLimeField,
                               token=graphene.String(),
                               date=graphene.DateTime(default_value=datetime.now()),
                               search_string=graphene.String(default_value=None),
@@ -30,5 +30,5 @@ class Query(graphene.ObjectType):
                            token=graphene.String(),
                            compare_range=graphene.Date())
 
-    leaderboars = graphene.List(of_type=LeaderboardsField,
-                                token=graphene.String())
+    leaderboards = graphene.List(of_type=LeaderboardsField,
+                                 token=graphene.String())
