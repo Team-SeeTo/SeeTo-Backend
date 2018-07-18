@@ -2,6 +2,7 @@ from mongoengine import *
 from datetime import datetime
 from app.models.idea import Idea
 from app.models.quick_memo import QuickMemo
+from app.models.store import StoreItem
 
 
 class User(Document):
@@ -15,6 +16,7 @@ class User(Document):
     quick_memo = ListField(ReferenceField(QuickMemo), default=[])
     todo = ListField(GenericReferenceField, default=[])
     ideas = ListField(ReferenceField(Idea), default=[])
+    my_items = ListField(ReferenceField(StoreItem))
     register_on = DateTimeField(required=True, default=datetime.now())
 
 
