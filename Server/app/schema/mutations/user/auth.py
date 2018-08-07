@@ -32,25 +32,25 @@ class AuthMutation(graphene.Mutation):
 class RefreshMutation(graphene.Mutation):
 
     class Arguments(object):
-        refresh_token = graphene.String()
+        token = graphene.String()
 
     access_token = graphene.String()
     message = graphene.String()
 
     @refresh_required
-    def mutate(self, info, refresh_token):
+    def mutate(self, info):
         return RefreshMutation(acces_token=create_access_token(get_jwt_identity()), message="Refresh success")
 
 
 class LogoutMutation(graphene.Mutation):
 
     class Arguments(object):
-        refresh_token = graphene.String()
+        token = graphene.String()
 
     is_success = graphene.Boolean()
     message = graphene.String()
 
     @refresh_required
-    def mutate(self, info, refresh_token):
+    def mutate(self, info):
         blacklist.add(get_jwt_identity())
         return LogoutMutation(is_success=True, message="Logout successful")
