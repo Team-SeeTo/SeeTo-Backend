@@ -9,8 +9,9 @@ class Query(graphene.ObjectType):
 
     todo = graphene.List(of_type=ToDoField,
                          token=graphene.String(),
+                         order_by=graphene.String(default_value=None),
                          type=graphene.String(default_value=None),
-                         order_by=graphene.String(default_value=None))
+                         search_string=graphene.String(default_value=None))
 
     ideas = graphene.List(of_type=IdeasField,
                           token=graphene.String(),
@@ -21,10 +22,10 @@ class Query(graphene.ObjectType):
                                token=graphene.String())
 
     timeline = graphene.List(of_type=TimeLimeField,
-                              token=graphene.String(),
-                              date=graphene.DateTime(default_value=datetime.now()),
-                              search_string=graphene.String(default_value=None),
-                              order_by=graphene.String(default_value=None))
+                             token=graphene.String(),
+                             date=graphene.DateTime(default_value=datetime.now()),
+                             search_string=graphene.String(default_value=None),
+                             order_by=graphene.String(default_value=None))
 
     mirror = graphene.List(of_type=MirrorViewField,
                            token=graphene.String(),
