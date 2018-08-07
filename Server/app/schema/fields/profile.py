@@ -7,4 +7,4 @@ class ProfileField(graphene.ObjectType):
     username = graphene.String()
     rank = graphene.Int()
     point = graphene.Int()
-    register_on = graphene.String()
+    register_on = graphene.DateTime()
