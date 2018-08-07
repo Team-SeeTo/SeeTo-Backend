@@ -1,6 +1,9 @@
 import graphene
-from app.schema.mutations import *
+from app.schema.mutations.user.auth import AuthMutation, RefreshMutation
+from app.schema.mutations.user.register import RegisterMutation
 
 
 class Mutation(graphene.ObjectType):
-    pass
+    auth = AuthMutation.Field()
+    refresh = RefreshMutation.Field()
+    register = RegisterMutation.Field()
