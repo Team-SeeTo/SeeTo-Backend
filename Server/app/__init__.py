@@ -1,11 +1,27 @@
 from functools import wraps
-
-from flask_graphql_auth import jwt_required, get_jwt_identity, jwt_refresh_token_required
+from flask import Flask
+from app.schema import Schema
+from flask_graphql_auth import GraphQLAuth
 
 from app.schema.fields import ResponseMessageField
+from flask_graphql_auth import jwt_required, get_jwt_identity, jwt_refresh_token_required
 from app.models import User
 
 blacklist = set()
+
+
+def create_app(*config_cls):
+    app_ = Flask(__name__)
+
+    for config in config_cls:
+        app_.config.from_object(config)
+
+    print('[INFO] Flask application initialized with {}'.format([config.__name__ for config in config_cls]))
+
+    GraphQLAuth().init_app(app_)
+    Schema().init_app(app_)
+
+    return app_
 
 
 def auth_required(fn):
