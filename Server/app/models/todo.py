@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 
 
-class TypeEnum(Enum):
+class Type(Enum):
     INFINITY = 1
     STANDARD = 2
     HARD = 3
@@ -16,17 +16,12 @@ class Milestone(Document):
 
 
 class ToDo(Document):
-    meta = {'allow_inheritance': True,
-            'collection': 'todo'}
+    meta = {'collection': 'todo'}
 
     title = StringField(required=True)
-    type = IntEnumField(TypeEnum, required=True)
+    type = IntEnumField(Type, required=True)
     created_at = DateTimeField(required=True, default=datetime.now())
     point = IntField(required=True, default=10)
     is_completed = BooleanField(required=True, default=False)
-
-
-class ToDoStandard(ToDo):
     milestones = EmbeddedDocumentListField(Milestone, required=True)
     expiration = DateTimeField(required=True)
-

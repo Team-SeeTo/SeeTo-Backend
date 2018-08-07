@@ -3,6 +3,7 @@ from datetime import datetime
 from app.models.idea import Idea
 from app.models.quick_memo import QuickMemo
 from app.models.store import StoreItem
+from app.models.todo import ToDo
 
 
 class User(Document):
@@ -14,7 +15,7 @@ class User(Document):
     rank = StringField(required=True)
     point = StringField(required=True, default=10)
     quick_memo = ListField(ReferenceField(QuickMemo), default=[])
-    todo = ListField(GenericReferenceField, default=[])
+    todo = ListField(ReferenceField(ToDo), default=[])
     ideas = ListField(ReferenceField(Idea), default=[])
     my_items = ListField(ReferenceField(StoreItem))
     register_on = DateTimeField(required=True, default=datetime.now())
