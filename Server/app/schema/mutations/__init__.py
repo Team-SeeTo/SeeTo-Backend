@@ -1,5 +1,5 @@
 import graphene
-from app.GraphQL.fields import *
+from app.schema.mutations import *
 
 
 class Mutation(graphene.ObjectType):
