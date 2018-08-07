@@ -17,8 +17,8 @@ class User(Document):
     quick_memo = ListField(ReferenceField(QuickMemo), default=[])
     todo = ListField(ReferenceField(ToDo), default=[])
     ideas = ListField(ReferenceField(Idea), default=[])
-    my_items = ListField(ReferenceField(StoreItem))
-    register_on = DateTimeField(required=True, default=datetime.now())
+    my_items = ListField(ReferenceField(StoreItem), default=[])
+    register_on = DateTimeField(required=True, default=datetime.now)
 
 
 class ToDoLog(EmbeddedDocument):
@@ -37,6 +37,6 @@ class IdeasLog(EmbeddedDocument):
 
 class UserLog(Document):
     user = ReferenceField(document_type=User, required=True)
-    date = DateTimeField(required=True, default=datetime.now())
+    date = DateTimeField(required=True, default=datetime.now)
     ToDo = EmbeddedDocumentField(document_type=ToDoLog, required=True, default=IdeasLog())
     Ideas = EmbeddedDocumentField(document_type=IdeasLog, required=True, default=IdeasLog())

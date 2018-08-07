@@ -13,7 +13,7 @@ class Idea(Document):
 
     title = StringField(required=True)
     body = StringField(required=True)
-    created_at = DateTimeField(required=True, default=datetime.now())
+    created_at = DateTimeField(required=True, default=datetime.now)
     point = IntField(required=True, default=10)
     upvoter = ListField(ReferenceField(document_type=User), required=True, default=[])
     comments = EmbeddedDocumentListField(Comment, default=[])

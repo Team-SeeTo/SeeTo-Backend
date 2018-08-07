@@ -20,7 +20,7 @@ class ToDo(Document):
 
     title = StringField(required=True)
     type = IntEnumField(Type, required=True)
-    created_at = DateTimeField(required=True, default=datetime.now())
+    created_at = DateTimeField(required=True, default=datetime.now)
     point = IntField(required=True, default=10)
     is_completed = BooleanField(required=True, default=False)
     milestones = EmbeddedDocumentListField(Milestone, required=True)
