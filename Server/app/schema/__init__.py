@@ -6,7 +6,12 @@ from app.schema.queries import Query
 
 
 class Schema:
-    def __init__(self, app):
+    def __init__(self, app=None):
+        self.app = app
+        if app is not None:
+            self.init_app(app)
+
+    def init_app(self, app):
         schema = graphene.Schema(query=Query, mutation=Mutation)
 
         app.add_url_rule(
