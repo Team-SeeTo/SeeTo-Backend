@@ -1,0 +1,17 @@
+
+os: linux
+sudo: false
+language: python
+virtualenv:
+  system_site_packages: false
+cache: pip
+matrix:
+  include:
+  - python: '3.6'
+  fast_finish: true
+install:
+- pip3 install -r requirements.txt
+script:
+- cd Server && python -m unittest
+after_success:
+- email: artoria@artoria.us
