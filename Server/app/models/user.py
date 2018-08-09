@@ -1,9 +1,6 @@
 from mongoengine import *
 from datetime import datetime
-from app.models.idea import Idea
-from app.models.quick_memo import QuickMemo
-from app.models.store import StoreItem
-from app.models.todo import ToDo
+from app.models import QuickMemo, StoreItem, ToDo, Idea
 
 
 class User(Document):
@@ -12,8 +9,8 @@ class User(Document):
     email = StringField(required=True, unique=True)
     username = StringField(required=True)
     password = StringField(required=True)
-    rank = StringField(required=True)
-    point = StringField(required=True, default=10)
+    rank = IntField(required=True)
+    point = IntField(required=True, default=10)
     quick_memo = ListField(ReferenceField(QuickMemo), default=[])
     todo = ListField(ReferenceField(ToDo), default=[])
     ideas = ListField(ReferenceField(Idea), default=[])

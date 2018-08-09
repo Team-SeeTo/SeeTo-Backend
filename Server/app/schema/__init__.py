@@ -1,6 +1,7 @@
 import graphene
-from functools import wraps
 from flask_graphql import GraphQLView
+
+from app.schema.fields import ResponseMessageField
 from app.schema.mutations import Mutation
 from app.schema.queries import Query
 

@@ -1,9 +1,9 @@
 from mongoengine import connect
-from .idea import Idea, Comment
 from .quick_memo import QuickMemo
 from .todo import ToDo, Type, Milestone
-from .user import User
 from .store import StoreItem, Effect
+from .idea import Idea, Comment
+from .user import User
 
 
 class Mongo:

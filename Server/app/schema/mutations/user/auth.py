@@ -3,7 +3,7 @@ from uuid import uuid4
 import graphene
 from flask_graphql_auth import create_access_token, create_refresh_token, get_jwt_identity
 
-from app import blacklist, refresh_required
+from app.schema.utils import blacklist, refresh_required
 from app.models import User
 
 
@@ -21,7 +21,7 @@ class AuthMutation(graphene.Mutation):
         user = User.objects(**kwargs).first()
 
         if user is not None:
-            access_token = create_access_token(identity=kwargs["id"])
+            access_token = create_access_token(identity=kwargs["email"])
             refresh_token = create_refresh_token(identity=str(uuid4()))
 
             return AuthMutation(access_token=access_token, refresh_token=refresh_token, message="Login Success")
