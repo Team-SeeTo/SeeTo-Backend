@@ -15,3 +15,17 @@ class TestAuth(BasicTestCase):
 
         self.assertEqual(response['auth']['message'], 'Login Success')
 
+    def test_refresh(self):
+        query = '''mutation{
+                      refresh(token: "_"){
+                          accessToken
+                          message
+                      }
+                   }'''
+        query = query.replace('_', self.refresh_token)
+
+        response = self.request(method=self.tester.post,
+                                query=query)
+
+        self.assertEqual(response['refresh']['message'], 'Refresh success')
+
