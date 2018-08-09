@@ -12,4 +12,4 @@ class IdeasField(graphene.ObjectType):
     body = graphene.String()
     created_at = graphene.DateTime()
     upvoter = graphene.List(graphene.String)
-    comments = graphene.List(graphene.Field(CommentField))
+    comments = graphene.List(CommentField)

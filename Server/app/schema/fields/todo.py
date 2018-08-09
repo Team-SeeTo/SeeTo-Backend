@@ -16,6 +16,6 @@ class ToDoField(graphene.ObjectType):
     title = graphene.String()
     type = TypeEnum
     created_at = graphene.DateTime()
-    milestones = graphene.List(graphene.Field(Milestone))
+    milestones = graphene.List(Milestone)
     expiration = graphene.DateTime()
     is_completed = graphene.Boolean()
