@@ -39,7 +39,7 @@ class RefreshMutation(graphene.Mutation):
 
     @refresh_required
     def mutate(self, info):
-        return RefreshMutation(acces_token=create_access_token(get_jwt_identity()), message="Refresh success")
+        return RefreshMutation(access_token=create_access_token(get_jwt_identity()), message="Refresh success")
 
 
 class LogoutMutation(graphene.Mutation):
