@@ -1,5 +1,4 @@
 from mongoengine import *
-from extras_mongoengine.fields import IntEnumField
 from enum import Enum
 
 
@@ -15,4 +14,4 @@ class StoreItem(Document):
 
     name = StringField(required=True)
     price = IntField(required=True)
-    effect = IntEnumField(Effect, default=Effect.FREEZE)
+    effect = StringField(required=True, default=Effect.FREEZE.name)
