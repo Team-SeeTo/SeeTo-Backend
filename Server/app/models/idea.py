@@ -1,10 +1,10 @@
 from mongoengine import *
 from datetime import datetime
-from app.models.user.user import User
+# from app.models import User
 
 
 class Comment(EmbeddedDocument):
-    author = ReferenceField(document_type=User, required=True)
+    author = GenericReferenceField(required=True)
     body = StringField(required=True)
 
 
