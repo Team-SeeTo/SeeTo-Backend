@@ -1,9 +1,9 @@
 from mongoengine import connect
-from .quick_memo import QuickMemo
-from .todo import ToDo, Type, Milestone
-from .store import StoreItem, Effect
-from .idea import Idea, Comment
-from .user import User
+from app.models.activity.todo import ToDo, Type, Milestone
+from app.models.activity.idea import Idea, Comment
+from app.models.activity.quick_memo import QuickMemo
+from app.models.store.store import StoreItem, Effect
+from app.models.user.user import User
 
 
 class Mongo:
