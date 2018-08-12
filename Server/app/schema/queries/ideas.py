@@ -12,5 +12,5 @@ def resolve_ideas(root, info, **kwargs):
                        body="Body",
                        created_at=datetime.now(),
                        upvoter=["steve", 'david'],
-                       comments=CommentField(author="steve",
-                                             body="Great"))]
+                       comments=[CommentField(author="steve",
+                                             body="Great")])]
