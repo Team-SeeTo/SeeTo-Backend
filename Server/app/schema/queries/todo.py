@@ -6,9 +6,9 @@ from datetime import *
 
 
 @auth_required
-def resolve_todo(root, info, order_by, **kwargs):
+def resolve_todo(root, info, **kwargs):
     return [ToDoField(title="Title",
-                      type=TypeEnum.STANDARD,
+                      type=TypeEnum.STANDARD.value,
                       created_at=datetime.now(),
                       milestones=[
                                      Milestone(name="Milestone",

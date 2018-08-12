@@ -17,9 +17,9 @@ class Query(graphene.ObjectType):
 
     todo = graphene.List(of_type=ToDoField,
                          token=graphene.String(),
-                         order_by=graphene.String(default_value=None),
-                         xp_type=graphene.String(default_value=None),
-                         search_string=graphene.String(default_value=None),
+                         order_by=graphene.String(),
+                         xp_type=graphene.String(default_value="all"),
+                         search_string=graphene.String(),
                          resolver=resolve_todo
                          )
 
