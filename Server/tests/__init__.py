@@ -16,11 +16,13 @@ class BasicTestCase(unittest.TestCase):
         app.testing = True
         self.tester = app.test_client(self)
 
-    def request(self, method, query=None):
-        response = method('/graphql',
-                          data=json.dumps({"query": query}),
-                          content_type='application/json'
-                          )
+    def request(self, type, call, body):
+        query = type + " {" + call + "{" + body + "}" + "}"
+
+        response = self.tester.post('/graphql',
+                                    data=json.dumps({"query": query}),
+                                    content_type='application/json'
+                                    )
         return dict(response.json)['data']
 
     def _create_fake_data(self):
@@ -66,14 +68,13 @@ class BasicTestCase(unittest.TestCase):
         fake_user_2.save()
 
     def _get_tokens(self):
-        response = self.request(method=self.tester.post,
-                                query='''mutation{
-                                            auth(email:"test@seeto.services", password:"admin1234"){
-                                                refreshToken
-                                                accessToken
-                                                message
-                                            }
-                                        }''')
+        response = self.request(type="mutation",
+                                call='auth(email:"test@seeto.services", password:"admin1234")',
+                                body='''
+                                     refreshToken
+                                     accessToken
+                                     message
+                                     ''')
 
         response = response['auth']
         self.access_token = response['accessToken']
