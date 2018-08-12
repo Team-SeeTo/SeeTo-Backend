@@ -12,7 +12,7 @@ def auth_required(fn):
     @wraps(fn)
     @jwt_required
     def wrapper(*args, **kwargs):
-        account = User.objects(username=get_jwt_identity()).first()
+        account = User.objects(email=get_jwt_identity()).first()
         if account is None:
             return ResponseMessageField(is_success=False, message="Invalid access token")
         return fn(*args, **kwargs)
