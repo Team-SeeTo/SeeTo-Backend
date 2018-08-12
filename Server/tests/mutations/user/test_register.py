@@ -6,11 +6,10 @@ class TestRegister(BasicTestCase):
         pass
 
     def test_register(self):
-        response = self.request(method=self.tester.post,
-                                query='''mutation{
-                                            register(email:"test@seeto.services", username: "lewis", password:"admin1234"){
-                                                message
-                                            }
-                                        }''')
+        response = self.request(type="mutation",
+                                call='register(email:"test@seeto.services", username: "lewis", password:"admin1234")',
+                                body='''
+                                message
+                                ''')
 
         self.assertEqual(response['register']['message'], 'Successfully registered')
