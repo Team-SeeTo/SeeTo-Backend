@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 @auth_required
-def resolve_profile(root, info, order_by, **kwargs):
+def resolve_profile(root, info, **kwargs):
     return ProfileField(profilepic="<URL>",
                         email="test@seeto.services",
                         username="Lewis",
