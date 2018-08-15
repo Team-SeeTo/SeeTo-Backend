@@ -2,7 +2,7 @@ import graphene
 
 
 class ProfileField(graphene.ObjectType):
-    profilepic = graphene.String()
+    img_path = graphene.String()
     email = graphene.String()
     username = graphene.String()
     rank = graphene.Int()
