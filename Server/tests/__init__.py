@@ -23,6 +23,8 @@ class BasicTestCase(unittest.TestCase):
                                     data=json.dumps({"query": query}),
                                     content_type='application/json'
                                     )
+
+        print(response.json)
         return dict(response.json)['data']
 
     def _create_fake_data(self):
@@ -54,7 +56,8 @@ class BasicTestCase(unittest.TestCase):
                            quick_memo=[fake_memo],
                            todo=[fake_todo],
                            ideas=[fake_idea],
-                           my_items=[fake_item]
+                           my_items=[fake_item],
+                           img_path="seeto.services/static/test1.jpg"
                            )
 
         fake_user_2 = User(email="test2@seeto.services",
@@ -62,6 +65,7 @@ class BasicTestCase(unittest.TestCase):
                            password="admin1234",
                            rank=2,
                            point=99,
+                           img_path="seeto.services/static/test2.jpg"
                            )
 
         fake_user_1.save()
