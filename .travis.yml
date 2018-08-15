@@ -10,8 +10,11 @@ matrix:
   - python: '3.6'
   fast_finish: true
 install:
-- pip3 install -r requirements.txt
+  - pip3 install -r requirements.txt
+  - pip3 install coveralls
 script:
-- cd Server && python -m unittest
+  - cd Server && python3 -m "nose" --verbose --with-coverage --cover-package=. unittest
 after_success:
-- email: artoria@artoria.us
+  - coverage report
+  - coveralls
+  - email: artoria@artoria.us
