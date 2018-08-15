@@ -6,7 +6,7 @@ from app.models import QuickMemo, StoreItem, ToDo, Idea
 class User(Document):
     meta = {'collection': 'user'}
 
-    email = StringField(required=True, unique=True)
+    email = StringField(primary_key=True)
     username = StringField(required=True)
     password = StringField(required=True)
     rank = IntField(required=True)
@@ -16,6 +16,7 @@ class User(Document):
     ideas = ListField(ReferenceField(Idea), default=[])
     my_items = ListField(ReferenceField(StoreItem), default=[])
     register_on = DateTimeField(required=True, default=datetime.now)
+    img_path = StringField(required=True, unique=True)
 
 
 class ToDoLog(EmbeddedDocument):
