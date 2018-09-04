@@ -1,1 +1,1 @@
-web: gunicorn Server/run_server:app
+web: python3 Server/run_server.py
