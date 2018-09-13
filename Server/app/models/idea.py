@@ -17,3 +17,4 @@ class Idea(Document):
     point = IntField(required=True, default=10)
     upvoter = ListField(GenericReferenceField(), default=[])
     comments = EmbeddedDocumentListField(Comment, default=[])
+    category = StringField(required=True)
