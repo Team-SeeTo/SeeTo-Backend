@@ -1,5 +1,6 @@
 import graphene
 from datetime import datetime
+from app.schema.unions import *
 from app.schema.fields import *
 from app.schema.queries.profile import resolve_profile
 from app.schema.queries.ideas import resolve_ideas
@@ -18,15 +19,15 @@ class Query(graphene.ObjectType):
     todo = graphene.List(of_type=ToDoField,
                          token=graphene.String(),
                          order_by=graphene.String(),
-                         xp_type=graphene.String(default_value="all"),
                          search_string=graphene.String(),
                          resolver=resolve_todo
                          )
 
-    ideas = graphene.List(of_type=IdeasField,
+    ideas = graphene.List(of_type=IdeasUnion,
                           token=graphene.String(),
                           search_string=graphene.String(),
-                          order_by=graphene.String(),
+                          filter_by=graphene.String(),
+                          start_rank=graphene.Int(),
                           resolver=resolve_ideas)
 
     quick_memo = graphene.List(of_type=QuickMemoField,
@@ -35,7 +36,6 @@ class Query(graphene.ObjectType):
 
     timeline = graphene.Field(type=TimeLimeField,
                               token=graphene.String(),
-                              date=graphene.DateTime(default_value=datetime.now()),
                               resolver=resolve_timeline)
 
     mirror = graphene.Field(type=MirrorViewField,
