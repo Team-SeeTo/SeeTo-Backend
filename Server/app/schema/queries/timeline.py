@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 @auth_required
-def resolve_timeline(root, info, date):
+def resolve_timeline(root, info):
     return TimeLimeField(date=datetime.now(),
                          todo=ToDoReviewField(new_create=1,
                                               milestone_complete=1,
