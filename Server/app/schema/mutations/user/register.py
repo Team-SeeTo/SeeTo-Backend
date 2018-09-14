@@ -24,6 +24,7 @@ class RegisterMutation(graphene.Mutation):
             new_user.save()
 
         except Exception as e:
+            print(str(e))
             return RegisterMutation(is_success=False, message="Registration Failure")
 
         return RegisterMutation(is_success=True, message="Successfully registered")
