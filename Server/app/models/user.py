@@ -16,7 +16,6 @@ class User(Document):
     ideas = ListField(ReferenceField(Idea), default=[])
     my_items = ListField(ReferenceField(StoreItem), default=[])
     register_on = DateTimeField(required=True, default=datetime.now)
-    img_path = StringField(unique=True)
 
 
 class ToDoLog(EmbeddedDocument):
