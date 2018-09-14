@@ -5,7 +5,7 @@ from config import dev
 from app import create_app
 import json
 
-app = create_app(dev.Config)
+app = create_app(dev.DevConfig)
 
 
 class BasicTestCase(unittest.TestCase):
@@ -28,25 +28,6 @@ class BasicTestCase(unittest.TestCase):
         return dict(response.json)['data']
 
     def _create_fake_data(self):
-        fake_idea = Idea(title="title",
-                         body="body")
-
-        fake_memo = QuickMemo(title="title",
-                              body="body")
-
-        fake_item = StoreItem(name="name",
-                              price=50)
-
-        fake_todo = ToDo(title="title",
-                         milestones=[
-                             Milestone(name="milestone")
-                         ],
-                         expiration=datetime.now() + timedelta(days=5))
-
-        fake_idea.save()
-        fake_item.save()
-        fake_memo.save()
-        fake_todo.save()
 
         fake_user_1 = User(email="test@seeto.services",
                            username="test1",
@@ -70,6 +51,27 @@ class BasicTestCase(unittest.TestCase):
 
         fake_user_1.save()
         fake_user_2.save()
+
+        fake_idea = Idea(title="title",
+                         body="body",
+                         author=fake_user_1)
+
+        fake_memo = QuickMemo(title="title",
+                              body="body")
+
+        fake_item = StoreItem(name="name",
+                              price=50)
+
+        fake_todo = ToDo(title="title",
+                         milestones=[
+                             Milestone(name="milestone")
+                         ],
+                         expiration=datetime.now() + timedelta(days=5))
+
+        fake_idea.save()
+        fake_item.save()
+        fake_memo.save()
+        fake_todo.save()
 
     def _get_tokens(self):
         response = self.request(type="mutation",
