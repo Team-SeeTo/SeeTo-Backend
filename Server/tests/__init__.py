@@ -33,8 +33,7 @@ class BasicTestCase(unittest.TestCase):
                            username="test2",
                            password="admin1234",
                            rank=2,
-                           point=99,
-                           img_path="seeto.services/static/test2.jpg"
+                           point=99
                            )
 
         fake_user_2.save()
@@ -68,8 +67,7 @@ class BasicTestCase(unittest.TestCase):
                            quick_memo=[fake_memo],
                            todo=[fake_todo],
                            ideas=[fake_idea],
-                           my_items=[fake_item],
-                           img_path="seeto.services/static/test1.jpg"
+                           my_items=[fake_item]
                            )
 
         fake_user_1.save()
