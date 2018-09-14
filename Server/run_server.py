@@ -1,8 +1,8 @@
 from app import create_app
-from config.dev import Config
+from config.production import ProdConfig
 
-app = create_app(Config)
+app = create_app(ProdConfig)
 
 if __name__ == "__main__":
 
-    app.run(**Config.RUN_SETTING)
+    app.run(**ProdConfig.RUN_SETTING)
