@@ -1,4 +1,7 @@
-class Config:
+from config import Config
+
+
+class DevConfig(Config):
     GRAPHIQL = True
     DEBUG = True
     HOST = '0.0.0.0'
