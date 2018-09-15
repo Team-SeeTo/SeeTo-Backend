@@ -11,8 +11,7 @@ def resolve_profile(root, info, **kwargs):
     user = get_jwt_identity()
     user = User.objects(email=user).first()
 
-    return ProfileField(img_path=user.img_path,
-                        email=user.email,
+    return ProfileField(email=user.email,
                         username=user.username,
                         rank=user.rank,
                         point=user.point,

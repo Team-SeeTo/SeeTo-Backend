@@ -6,7 +6,6 @@ class TestProfile(BasicTestCase):
         response = self.request(type="query",
                                 call='profile(token :"{0}")'.format(self.access_token),
                                 body='''
-                                imgPath
                                 email
                                 username
                                 rank
