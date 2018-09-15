@@ -1,6 +1,6 @@
 import graphene
 from datetime import datetime
-from app.schema.unions import *
+from app.schema.unions import IdeasUnion
 from app.schema.fields import *
 from app.schema.queries.profile import resolve_profile
 from app.schema.queries.ideas import resolve_ideas
