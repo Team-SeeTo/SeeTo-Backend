@@ -1,11 +1,8 @@
-from app.schema.fields import IdeasField, CommentField
 from flask_graphql_auth import get_jwt_identity
 
 from app.schema.utils import auth_required
-from app.models import *
-from app.schema.fields import *
-
-from utils import construct
+from app.models import Idea
+from app.schema.fields import IdeasField, CommentField
 
 
 @auth_required
