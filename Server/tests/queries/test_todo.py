@@ -4,7 +4,7 @@ from tests import BasicTestCase
 class TestToDo(BasicTestCase):
     def test_todo(self):
         response = self.request(type="query",
-                                call='todo(token: "{0}")'.format(self.access_token),
+                                call='todo(token: "{0}", orderBy: "type", searchString: "ti")'.format(self.access_token),
                                 body='''
                                 title
                                 type
