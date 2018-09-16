@@ -1,18 +1,27 @@
 from app.schema.fields import ToDoField, TypeEnum, Milestone
-from utils import constructor
 from app.schema.utils import auth_required
+from app.models import User
 
-from datetime import *
+from flask_graphql_auth import get_jwt_identity
 
 
 @auth_required
 def resolve_todo(root, info, **kwargs):
-    return [ToDoField(title="Title",
-                      type=TypeEnum.STANDARD.value,
-                      created_at=datetime.now(),
-                      milestones=[
-                                     Milestone(name="Milestone",
-                                               is_completed=False)
-                                 ] * 2,
-                      expiration=datetime.now() + timedelta(days=10),
-                      is_completed=False)] * 2
+    order = kwargs.get('order_by', None)
+    search = kwargs.get('search_string', None)
+
+    user = get_jwt_identity()
+    todos = list(User.objects(email=user).first().todo)
+
+    if order is not None:
+        todos.sort(key=lambda todo: todo[order])
+
+    if search is not None:
+        todos = [t for t in todos if search in t.title]
+
+    return [ToDoField(title=t.title,
+                      type=t.type,
+                      created_at=t.created_at,
+                      milestones=[Milestone(name=m.name, is_completed=m.is_completed) for m in t.milestones],
+                      expiration=t.expiration,
+                      is_completed=t.is_completed) for t in todos]
