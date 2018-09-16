@@ -22,7 +22,7 @@ def resolve_ideas(root, info, **kwargs):
                         title=idea.title,
                         body=idea.body,
                         created_at=idea.created_at,
-                        upvoter=[v.username for v in idea.upvoter],
+                        upvoter=len([v.username for v in idea.upvoter]),
                         comments=[CommentField(author=c.author.username, body=c.body) for c in idea.comments],
                         category=idea.category) for idea in ideas]
 

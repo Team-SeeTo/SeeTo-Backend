@@ -23,5 +23,5 @@ class TestIdeas(BasicTestCase):
         self.assertEqual(type(response['ideas'][0]['author']), str)
         self.assertEqual(type(response['ideas'][0]['title']), str)
         self.assertEqual(type(response['ideas'][0]['body']), str)
-        self.assertEqual(type(response['ideas'][0]['upvoter']), list)
+        self.assertEqual(type(response['ideas'][0]['upvoter']), int)
         self.assertEqual(type(response['ideas'][0]['comments']), list)
