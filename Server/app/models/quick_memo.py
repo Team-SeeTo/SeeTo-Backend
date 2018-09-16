@@ -9,4 +9,3 @@ class QuickMemo(Document):
     body = StringField(required=True)
     created_at = DateTimeField(required=True, default=datetime.now)
     point = IntField(required=True, default=10)
-    tag = ListField(StringField, default=[])
