@@ -12,9 +12,7 @@ def resolve_ideas(root, info, **kwargs):
     filter_by = kwargs.get('filter_by', None)
     start_rank = kwargs.get('start_rank', 1) - 1
 
-    ideas = Idea.objects[start_rank: start_rank+30]\
-        .order_by('point')
-    print(dict(ideas[0].to_mongo()))
+    ideas = Idea.objects[start_rank: start_rank+30].order_by('point')
 
     if filter_by is not None:
         ideas = [idea for idea in ideas if idea.category == filter_by]
