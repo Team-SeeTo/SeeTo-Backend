@@ -73,6 +73,11 @@ class BasicTestCase(unittest.TestCase):
 
         fake_user_1.save()
 
+        fake_user_log = UserLog(user=fake_user_1,
+                                ToDo=ToDoLog(),
+                                Ideas=IdeasLog())
+        fake_user_log.save()
+
     def _get_tokens(self):
         response = self.request(type="mutation",
                                 call='auth(email:"test@seeto.services", password:"admin1234")',
@@ -96,3 +101,4 @@ class BasicTestCase(unittest.TestCase):
         QuickMemo.objects.delete()
         ToDo.objects.delete()
         StoreItem.objects.delete()
+        UserLog.objects.delete()
