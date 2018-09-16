@@ -3,7 +3,7 @@ from .quick_memo import QuickMemo
 from .todo import ToDo, Type, Milestone
 from .store import StoreItem, Effect
 from .idea import Idea, Comment
-from .user import User
+from .user import User, UserLog, IdeasLog, ToDoLog
 
 
 class Mongo:
