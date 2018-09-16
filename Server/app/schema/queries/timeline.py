@@ -1,5 +1,4 @@
 from app.schema.fields import TimeLimeField, ToDoReviewField, IdeasReviewField
-from utils import constructor
 from app.schema.utils import auth_required
 
 from datetime import datetime

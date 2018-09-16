@@ -1,6 +1,5 @@
 from app.schema.fields import MirrorViewField, Growth
 from app.schema.utils import auth_required
-from utils import constructor
 
 
 @auth_required

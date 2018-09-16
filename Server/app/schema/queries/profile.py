@@ -1,9 +1,8 @@
 from app.schema.fields import ProfileField
-from utils import constructor
-from flask_graphql_auth import get_jwt_identity
 from app.schema.utils import auth_required
-from datetime import datetime
 from app.models.user import User
+
+from flask_graphql_auth import get_jwt_identity
 
 
 @auth_required

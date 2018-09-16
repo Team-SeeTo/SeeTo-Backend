@@ -1,5 +1,4 @@
 from app.schema.fields import LeaderboardsField
-from utils import constructor
 from app.schema.utils import auth_required
 
 
