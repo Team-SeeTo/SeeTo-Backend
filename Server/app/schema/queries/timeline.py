@@ -1,5 +1,4 @@
-from app.schema.fields import TimeLimeField, ToDoReviewField, IdeasReviewField
-from app.schema.utils import auth_required
+from app.schema.fields import TimeLineField, ToDoReviewField, IdeasReviewField
 from app.models import User, UserLog
 
 from flask_graphql_auth import get_jwt_identity

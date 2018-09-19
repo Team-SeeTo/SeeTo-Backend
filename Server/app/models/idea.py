@@ -11,7 +11,7 @@ class Comment(EmbeddedDocument):
 class Idea(Document):
     meta = {'collection': 'idea'}
 
-    author = GenericReferenceField(unique=True)
+    author = GenericReferenceField()
     title = StringField(required=True)
     body = StringField(required=True)
     created_at = DateTimeField(required=True, default=datetime.now)

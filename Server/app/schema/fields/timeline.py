@@ -15,7 +15,7 @@ class IdeasReviewField(graphene.ObjectType):
     total_point = graphene.Int()
 
 
-class TimeLimeField(graphene.ObjectType):
+class TimeLineField(graphene.ObjectType):
     date = graphene.DateTime()
     todo = graphene.Field(ToDoReviewField)
     ideas = graphene.Field(IdeasReviewField)
