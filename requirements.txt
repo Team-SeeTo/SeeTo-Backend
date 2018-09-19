@@ -22,5 +22,5 @@ sentinels==1.0.0
 six==1.11.0
 typing==3.6.4
 Werkzeug==0.14.1
-Flask-GraphQL-Auth==0.5.1
+Flask-GraphQL-Auth==1.1
 gunicorn
