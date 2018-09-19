@@ -1,9 +1,10 @@
-from app.schema.utils import auth_required
 from app.models import Idea
 from app.schema.fields import IdeasField, CommentField
 
+from flask_graphql_auth import query_jwt_required
 
-@auth_required
+
+@query_jwt_required
 def resolve_ideas(root, info, **kwargs):
 
     search = kwargs.get('search_string', None)

@@ -1,2 +1,2 @@
-from .idea import IdeasUnion
+from .query import IdeasUnion, ProfileUnion, ToDoUnion, QuickMemoUnion, TimeLineUnion, LeaderboardsUnion
 from .mutation import ResponseUnion, AuthUnion, RefreshUnion

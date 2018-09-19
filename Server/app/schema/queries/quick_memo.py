@@ -1,11 +1,10 @@
 from app.schema.fields import QuickMemoField
-from app.schema.utils import auth_required
 from app.models import User
 
-from flask_graphql_auth import get_jwt_identity
+from flask_graphql_auth import get_jwt_identity, query_jwt_required
 
 
-@auth_required
+@query_jwt_required
 def resolve_quick_memo(root, info):
     user = get_jwt_identity()
     memos = list(User.objects(email=user).first().quick_memo)

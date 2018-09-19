@@ -1,11 +1,10 @@
-from app.schema.fields import ToDoField, TypeEnum, Milestone
-from app.schema.utils import auth_required
+from app.schema.fields import ToDoField, Milestone
 from app.models import User
 
-from flask_graphql_auth import get_jwt_identity
+from flask_graphql_auth import get_jwt_identity, query_jwt_required
 
 
-@auth_required
+@query_jwt_required
 def resolve_todo(root, info, **kwargs):
     order = kwargs.get('order_by', None)
     search = kwargs.get('search_string', None)
