@@ -6,13 +6,13 @@ from flask_graphql_auth import get_jwt_identity
 
 
 @auth_required
-def resolve_profile(root, info, **kwargs):
+def resolve_profile(root, info):
     user = get_jwt_identity()
     user = User.objects(email=user).first()
 
     return ProfileField(email=user.email,
                         username=user.username,
-                        rank=user.rank,
+                        rank=list(User.objects.order_by('-point')).index(user)+1,
                         point=user.point,
                         register_on=user.register_on)
 

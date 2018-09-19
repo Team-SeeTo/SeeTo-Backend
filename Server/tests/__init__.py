@@ -32,7 +32,6 @@ class BasicTestCase(unittest.TestCase):
         fake_user_2 = User(email="test2@seeto.services",
                            username="test2",
                            password="admin1234",
-                           rank=2,
                            point=99
                            )
 
@@ -63,7 +62,6 @@ class BasicTestCase(unittest.TestCase):
         fake_user_1 = User(email="test@seeto.services",
                            username="test1",
                            password="admin1234",
-                           rank=1,
                            point=100,
                            quick_memo=[fake_memo],
                            todo=[fake_todo],

@@ -9,7 +9,6 @@ class User(Document):
     email = StringField(primary_key=True)
     username = StringField(required=True)
     password = StringField(required=True)
-    rank = IntField(required=True)
     point = IntField(required=True, default=10)
     quick_memo = ListField(ReferenceField(QuickMemo), default=[])
     todo = ListField(ReferenceField(ToDo), default=[])
