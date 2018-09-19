@@ -6,9 +6,11 @@ class TestLeaderboards(BasicTestCase):
         response = self.request(type="query",
                                 call='leaderboards(token :"{0}")'.format(self.access_token),
                                 body='''
-                                rank
-                                name
-                                point
+                                ... on LeaderboardsField{
+                                    rank
+                                    name
+                                    point
+                                }
                                 ''')
 
         for user in response['leaderboards']:

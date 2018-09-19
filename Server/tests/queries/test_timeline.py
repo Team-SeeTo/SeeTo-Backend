@@ -7,6 +7,7 @@ class TestTimeLine(BasicTestCase):
         response = self.request(type="query",
                      call='timeline(token: "{0}")'.format(self.access_token),
                      body='''
+                     ... on TimeLineField{
                      date
                      todo{
                         totalPoint
@@ -15,6 +16,7 @@ class TestTimeLine(BasicTestCase):
                         totalPoint
                      }
                      totalPoint
+                     }
                      ''')
 
         self.assertEqual(type(response['timeline']['totalPoint']), int)

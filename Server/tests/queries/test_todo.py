@@ -6,6 +6,7 @@ class TestToDo(BasicTestCase):
         response = self.request(type="query",
                                 call='todo(token: "{0}", orderBy: "type", searchString: "ti")'.format(self.access_token),
                                 body='''
+                                ... on ToDoField{
                                 title
                                 type
                                 createdAt
@@ -15,6 +16,7 @@ class TestToDo(BasicTestCase):
                                 }
                                 expiration
                                 isCompleted
+                                }
                                 ''')
 
         self.assertEqual(type(response['todo'][0]['type']), str)

@@ -80,14 +80,18 @@ class BasicTestCase(unittest.TestCase):
         response = self.request(type="mutation",
                                 call='auth(email:"test@seeto.services", password:"admin1234")',
                                 body='''
+                                     result{
+                                     ... on AuthField{
                                      refreshToken
                                      accessToken
                                      message
+                                     }
+                                     }
                                      ''')
 
         response = response['auth']
-        self.access_token = response['accessToken']
-        self.refresh_token = response['refreshToken']
+        self.access_token = response['result']['accessToken']
+        self.refresh_token = response['result']['refreshToken']
 
     def setUp(self):
         self._create_fake_data()
