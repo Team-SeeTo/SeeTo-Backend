@@ -1,4 +1,4 @@
-from .ext import ResponseMessageField
+from .ext import ResponseMessageField, AuthField, RefreshField
 from .todo import ToDoField, TypeEnum, Milestone
 from .store import StoreItemField
 from .idea import IdeasField, CommentField
