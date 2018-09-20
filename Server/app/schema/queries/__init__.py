@@ -35,7 +35,7 @@ class Query(graphene.ObjectType):
 
     timeline = graphene.Field(type=TimeLineUnion,
                               token=graphene.String(),
-                              date=graphene.Date(default_value=datetime.now),
+                              date=graphene.Date(default_value=str(datetime.now().date())),
                               resolver=resolve_timeline)
 
     leaderboards = graphene.List(of_type=LeaderboardsUnion,
