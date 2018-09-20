@@ -7,20 +7,28 @@ class TestAuth(BasicTestCase):
         response = self.request(type="mutation",
                                 call='auth(email:"test@seeto.services", password:"admin1234")',
                                 body='''
+                                     result{
+                                     ... on AuthField{
                                      refreshToken
                                      accessToken
                                      message
+                                     }
+                                     }
                                      ''')
 
-        self.assertEqual(response['auth']['message'], 'Login Success')
+        self.assertEqual(response['auth']['result']['message'], 'Login Success')
 
     def test_refresh(self):
         response = self.request(type="mutation",
-                                call='refresh(token: "{}")'.format(self.refresh_token),
+                                call='refresh(refreshToken: "{}")'.format(self.refresh_token),
                                 body='''
+                                     result{
+                                     ... on RefreshField{
                                      accessToken
                                      message
+                                     }
+                                     }
                                      ''')
 
-        self.assertEqual(response['refresh']['message'], 'Refresh success')
+        self.assertEqual(response['refresh']['result']['message'], 'Refresh success')
 

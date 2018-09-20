@@ -15,7 +15,7 @@ class ResponseUnion(graphene.Union):
 
 class AuthUnion(graphene.Union):
     class Meta:
-        types = (AuthField, AuthInfoField)
+        types = (AuthField, ResponseMessageField)
 
     @classmethod
     def resolve_type(cls, instance, info):

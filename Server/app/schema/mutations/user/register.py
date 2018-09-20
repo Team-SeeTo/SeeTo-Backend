@@ -17,9 +17,6 @@ class RegisterMutation(graphene.Mutation):
     @staticmethod
     def mutate(root, info, **kwargs):
         try:
-            rank = User.objects.count() + 1
-            kwargs.update({"rank": rank})
-
             new_user = User(**kwargs)
             new_user.save()
 

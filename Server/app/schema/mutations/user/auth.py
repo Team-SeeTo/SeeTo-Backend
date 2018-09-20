@@ -34,12 +34,12 @@ class AuthMutation(graphene.Mutation):
 class RefreshMutation(graphene.Mutation):
 
     class Arguments(object):
-        token = graphene.String()
+        refresh_token = graphene.String()
 
     result = graphene.Field(RefreshUnion)
 
     @classmethod
     @mutation_jwt_refresh_token_required
-    def mutate(cls, _, info):
+    def mutate(cls, _, **kwargs):
         return RefreshMutation(result=RefreshField(access_token=create_access_token(get_jwt_identity()),
                                                    message="Refresh success"))
