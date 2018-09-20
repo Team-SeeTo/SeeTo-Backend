@@ -1,4 +1,4 @@
-from app.schema.fields import ToDoField, MilestoneField
+from app.schema.fields import ToDoField, MilestoneField, ResponseMessageField
 from app.models import User
 
 from flask_graphql_auth import get_jwt_identity, query_jwt_required
@@ -8,9 +8,25 @@ from flask_graphql_auth import get_jwt_identity, query_jwt_required
 def resolve_todo(root, info, **kwargs):
     order = kwargs.get('order_by', None)
     search = kwargs.get('search_string', None)
+    view_id = kwargs.get('view', None)
 
     user = get_jwt_identity()
     todos = list(User.objects(email=user).first().todo)
+
+    if view_id is not None:
+        todo = [todo for todo in todos if todo.id == view_id]
+
+        if todo == []:
+            return ResponseMessageField(is_success=False, message="Not found")
+
+        todo = todo[0]
+
+        return ToDoField(title=todo.title,
+                         type=todo.type,
+                         created_at=todo.created_at,
+                         milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in todo.milestones],
+                         expiration=todo.expiration,
+                         is_completed=todo.is_completed)
 
     if order is not None:
         todos.sort(key=lambda todo: todo[order])
