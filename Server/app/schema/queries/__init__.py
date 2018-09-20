@@ -27,6 +27,7 @@ class Query(graphene.ObjectType):
                           search_string=graphene.String(),
                           filter_by=graphene.String(),
                           start_rank=graphene.Int(),
+                          view=graphene.String(),
                           resolver=resolve_ideas)
 
     quick_memo = graphene.List(of_type=QuickMemoUnion,

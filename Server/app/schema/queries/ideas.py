@@ -9,6 +9,7 @@ def resolve_ideas(root, info, **kwargs):
 
     search = kwargs.get('search_string', None)
     filter_by = kwargs.get('filter_by', None)
+    view_id = kwargs.get('view', None)
     start_rank = kwargs.get('start_rank', 1) - 1
 
     ideas = Idea.objects[start_rank: start_rank+30].order_by('point')
@@ -19,7 +20,19 @@ def resolve_ideas(root, info, **kwargs):
     if search is not None:
         ideas = [idea for idea in ideas if (search in idea.body) or (search in idea.title)]
 
-    ideas = [IdeasField(author=idea.author.username,
+    if search is not None:
+        idea = [idea for idea in ideas if view_id == idea.id][0]
+        return IdeasField(id=view_id,
+                          author=idea.author.name,
+                          title=idea.title,
+                          body=idea.body,
+                          created_at=idea.created_at,
+                          upvoter=len([v.username for v in idea.upvoter]),
+                          comments=[CommentField(author=c.author.username, body=c.body) for c in idea.comments],
+                          category=idea.category)
+
+    ideas = [IdeasField(id=str(idea.id),
+                        author=idea.author.username,
                         title=idea.title,
                         body=idea.body,
                         created_at=idea.created_at,

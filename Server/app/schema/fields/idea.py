@@ -7,6 +7,7 @@ class CommentField(graphene.ObjectType):
 
 
 class IdeasField(graphene.ObjectType):
+    id = graphene.String()
     author = graphene.String()
     title = graphene.String()
     body = graphene.String()
