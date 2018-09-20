@@ -18,9 +18,9 @@ class NewIdeaMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, title, body, category):
-        author = User.objects(email=get_jwt_identity())
+        author = User.objects(email=get_jwt_identity()).first()
 
-        new_idea = Idea(author=author.first(),
+        new_idea = Idea(author=author,
                         title=title,
                         body=body,
                         category=category)
