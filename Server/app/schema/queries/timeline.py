@@ -7,7 +7,7 @@ from flask_graphql_auth import get_jwt_identity, query_jwt_required
 
 @query_jwt_required
 def resolve_timeline(root, info, date):
-    date = datetime.strptime(date, "%Y-%M-%D").date()
+    date = datetime.strptime(date, "%Y-%m-%d").date()
     user = User.objects(email=get_jwt_identity()).first()
     timeline = [t for t in UserLog.objects(user=user) if t.date.date() == date][0]
 
