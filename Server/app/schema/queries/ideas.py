@@ -12,21 +12,11 @@ def resolve_ideas(root, info, **kwargs):
     view_id = kwargs.get('view', None)
     start_rank = kwargs.get('start_rank', 1) - 1
 
-    ideas = Idea.objects[start_rank: start_rank+30].order_by('point')
-
-    if filter_by is not None:
-        ideas = [idea for idea in ideas if idea.category == filter_by]
-
-    if search is not None:
-        ideas = [idea for idea in ideas if (search in idea.body) or (search in idea.title)]
-
     if view_id is not None:
-        idea = [idea for idea in ideas if view_id == idea.id]
+        idea = Idea.objects(id=view_id).first()
 
-        if idea == []:
+        if idea is None:
             return ResponseMessageField(is_success=False, message="Not found")
-
-        idea = idea[0]
 
         return IdeasField(id=view_id,
                           author=idea.author.name,
@@ -36,6 +26,14 @@ def resolve_ideas(root, info, **kwargs):
                           upvoter=len([v.username for v in idea.upvoter]),
                           comments=[CommentField(author=c.author.username, body=c.body) for c in idea.comments],
                           category=idea.category)
+
+    ideas = Idea.objects[start_rank: start_rank+30].order_by('point')
+
+    if filter_by is not None:
+        ideas = [idea for idea in ideas if idea.category == filter_by]
+
+    if search is not None:
+        ideas = [idea for idea in ideas if (search in idea.body) or (search in idea.title)]
 
     ideas = [IdeasField(id=str(idea.id),
                         author=idea.author.username,
