@@ -12,8 +12,8 @@ class NewToDoMutation(graphene.Mutation):
     class Arguments(object):
         token = graphene.String()
         title = graphene.String()
-        milestones = graphene.List(Milestone)
         type = TypeEnum()
+        milestones = graphene.List(graphene.String)
         expiration = graphene.Date()
 
     result = graphene.Field(ResponseUnion)
@@ -24,9 +24,8 @@ class NewToDoMutation(graphene.Mutation):
         user = User.objects(email=get_jwt_identity())
 
         new_todo = ToDo(title=title,
-                        type=type.name,
-                        milestones=[Milestone(name=m.name,
-                                              is_completed=m.is_completed) for m in milestones],
+                        type=type,
+                        milestones=[Milestone(name=m) for m in milestones],
                         expiration=expiration)
         new_todo.save()
 
