@@ -1,17 +1,19 @@
 import graphene
 from flask_graphql_auth import mutation_jwt_required, get_jwt_identity, AuthInfoField
 
-from app.models import User, ToDo, Type, Milestone
+from app.models import User, ToDo, Milestone, Type
 from app.schema.unions import ResponseUnion
-from app.schema.fields import ResponseMessageField, TypeEnum, Milestone
+from app.schema.fields import ResponseMessageField
+
+TypeEnum = graphene.Enum.from_enum(Type)
 
 
 class NewToDoMutation(graphene.Mutation):
     class Arguments(object):
         token = graphene.String()
         title = graphene.String()
-        type = graphene.Enum.from_enum(Type)
         milestones = graphene.List(Milestone)
+        type = TypeEnum()
         expiration = graphene.Date()
 
     result = graphene.Field(ResponseUnion)
@@ -35,4 +37,3 @@ class NewToDoMutation(graphene.Mutation):
 
         return ResponseMessageField(is_success=True,
                                     message="Idea upload success")
-
