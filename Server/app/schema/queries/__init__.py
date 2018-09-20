@@ -19,6 +19,7 @@ class Query(graphene.ObjectType):
                          token=graphene.String(),
                          order_by=graphene.String(),
                          search_string=graphene.String(),
+                         view=graphene.String(),
                          resolver=resolve_todo
                          )
 
@@ -32,6 +33,7 @@ class Query(graphene.ObjectType):
 
     quick_memo = graphene.List(of_type=QuickMemoUnion,
                                token=graphene.String(),
+                               view=graphene.String(),
                                resolver=resolve_quick_memo)
 
     timeline = graphene.Field(type=TimeLineUnion,
