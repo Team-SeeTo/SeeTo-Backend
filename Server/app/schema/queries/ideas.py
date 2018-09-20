@@ -1,5 +1,5 @@
 from app.models import Idea
-from app.schema.fields import IdeasField, CommentField
+from app.schema.fields import IdeasField, CommentField, ResponseMessageField
 
 from flask_graphql_auth import query_jwt_required
 
@@ -20,8 +20,14 @@ def resolve_ideas(root, info, **kwargs):
     if search is not None:
         ideas = [idea for idea in ideas if (search in idea.body) or (search in idea.title)]
 
-    if search is not None:
-        idea = [idea for idea in ideas if view_id == idea.id][0]
+    if view_id is not None:
+        idea = [idea for idea in ideas if view_id == idea.id]
+
+        if idea == []:
+            return ResponseMessageField(is_success=False, message="Not found")
+
+        idea = idea[0]
+
         return IdeasField(id=view_id,
                           author=idea.author.name,
                           title=idea.title,
