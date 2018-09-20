@@ -1,5 +1,5 @@
 from .ext import ResponseMessageField, AuthField, RefreshField
-from .todo import ToDoField, TypeEnum, Milestone
+from .todo import ToDoField, TypeEnum, MilestoneField
 from .store import StoreItemField
 from .idea import IdeasField, CommentField
 from .profile import ProfileField

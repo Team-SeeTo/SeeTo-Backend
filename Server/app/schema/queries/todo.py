@@ -1,4 +1,4 @@
-from app.schema.fields import ToDoField, Milestone
+from app.schema.fields import ToDoField, MilestoneField
 from app.models import User
 
 from flask_graphql_auth import get_jwt_identity, query_jwt_required
@@ -21,6 +21,6 @@ def resolve_todo(root, info, **kwargs):
     return [ToDoField(title=t.title,
                       type=t.type,
                       created_at=t.created_at,
-                      milestones=[Milestone(name=m.name, is_completed=m.is_completed) for m in t.milestones],
+                      milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in t.milestones],
                       expiration=t.expiration,
                       is_completed=t.is_completed) for t in todos]

@@ -7,7 +7,7 @@ class TypeEnum(graphene.Enum):
     HARD = 3
 
 
-class Milestone(graphene.ObjectType):
+class MilestoneField(graphene.ObjectType):
     name = graphene.String()
     is_completed = graphene.Boolean()
 
@@ -16,6 +16,6 @@ class ToDoField(graphene.ObjectType):
     title = graphene.String()
     type = graphene.String()
     created_at = graphene.DateTime()
-    milestones = graphene.List(Milestone)
+    milestones = graphene.List(MilestoneField)
     expiration = graphene.DateTime()
     is_completed = graphene.Boolean()
