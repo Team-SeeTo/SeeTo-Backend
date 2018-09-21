@@ -1,5 +1,5 @@
-from .mutations.user.test_register import *
-from .mutations.user.test_auth import *
+from .mutations.test_register import *
+from .mutations.test_auth import *
 
 from .queries.test_profile import *
 from .queries.test_ideas import *
