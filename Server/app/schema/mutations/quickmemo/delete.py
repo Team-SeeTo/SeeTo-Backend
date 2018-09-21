@@ -18,7 +18,7 @@ class DeleteQuickMemoMutation(graphene.Mutation):
     def mutate(cls, _, info, id):
         user = User.objects(email=get_jwt_identity()).first()
 
-        memo = [memo for memo in user.quick_memo if memo.id == id]
+        memo = [memo for memo in user.quick_memo if str(memo.id) == id]
 
         if memo == []:
             return DeleteQuickMemoMutation(result=ResponseMessageField(is_success=False,

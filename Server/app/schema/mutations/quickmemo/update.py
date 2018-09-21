@@ -19,7 +19,8 @@ class UpdateQuickMemoMutation(graphene.Mutation):
     def mutate(cls, _, info, id, update):
         user = User.objects(email=get_jwt_identity()).first()
 
-        memo = [memo for memo in user.quick_memo if memo.id == id]
+        memo = [memo for memo in user.quick_memo if str(memo.id) == id]
+        print(memo)
 
         if memo == []:
             return UpdateQuickMemoMutation(result=ResponseMessageField(is_success=False,
