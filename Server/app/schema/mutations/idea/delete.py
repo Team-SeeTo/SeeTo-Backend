@@ -10,13 +10,12 @@ class DeleteIdeaMutation(graphene.Mutation):
     class Arguments(object):
         token = graphene.String()
         id = graphene.String()
-        update = graphene.String()
 
     result = graphene.Field(ResponseUnion)
 
     @classmethod
     @mutation_jwt_required
-    def mutate(cls, _, info, id, update):
+    def mutate(cls, _, info, id):
         user = User.objects(email=get_jwt_identity()).first()
 
         idea = Idea.objects(id=id, author=user).first()
