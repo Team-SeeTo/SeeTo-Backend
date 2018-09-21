@@ -17,16 +17,17 @@ def resolve_todo(root, info, **kwargs):
         todo = [todo for todo in todos if todo.id == view_id]
 
         if todo == []:
-            return ResponseMessageField(is_success=False, message="Not found")
+            return [ResponseMessageField(is_success=False, message="Not found")]
 
         todo = todo[0]
 
-        return ToDoField(title=todo.title,
-                         type=todo.type,
-                         created_at=todo.created_at,
-                         milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in todo.milestones],
-                         expiration=todo.expiration,
-                         is_completed=todo.is_completed)
+        return [ToDoField(title=todo.title,
+                          type=todo.type,
+                          created_at=todo.created_at,
+                          milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in
+                                      todo.milestones],
+                          expiration=todo.expiration,
+                          is_completed=todo.is_completed)]
 
     if order is not None:
         todos.sort(key=lambda todo: todo[order])

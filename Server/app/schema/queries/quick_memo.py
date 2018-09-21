@@ -18,9 +18,9 @@ def resolve_quick_memo(root, info, **kwargs):
         memo = [memo for memo in memos if view_id == memo.id]
 
         if memo == []:
-            return ResponseMessageField(is_success=False, message="Not found")
+            return [ResponseMessageField(is_success=False, message="Not found")]
 
         memo = memo[0]
-        return QuickMemoField(id=memo.id, title=memo.title, body=memo.body)
+        return [QuickMemoField(id=memo.id, title=memo.title, body=memo.body)]
 
     return [QuickMemoField(id=m.id,title=m.title, body=m.body) for m in memos]
