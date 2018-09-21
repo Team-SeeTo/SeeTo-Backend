@@ -10,7 +10,7 @@ class ProdConfig(Config):
 
     RUN_SETTING = {
         'host': HOST,
-        'port': 5000,
+        'port': 80,
         'debug': DEBUG
     }
 
