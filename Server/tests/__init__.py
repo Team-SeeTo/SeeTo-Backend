@@ -28,18 +28,21 @@ class BasicTestCase(unittest.TestCase):
         return dict(response.json)['data']
 
     def _create_fake_data(self):
-
         fake_user_2 = User(email="test2@seeto.services",
                            username="test2",
                            password="admin1234",
                            point=99
-                           )
+                           ).save()
 
-        fake_user_2.save()
+        fake_user_1 = User(email="test@seeto.services",
+                           username="test1",
+                           password="admin1234",
+                           point=100
+                           ).save()
 
         fake_idea = Idea(title="title",
                          body="body",
-                         author=fake_user_2,
+                         author=fake_user_1,
                          category="test")
 
         fake_memo = QuickMemo(title="title",
@@ -59,22 +62,19 @@ class BasicTestCase(unittest.TestCase):
         fake_memo.save()
         fake_todo.save()
 
-        fake_user_1 = User(email="test@seeto.services",
-                           username="test1",
-                           password="admin1234",
-                           point=100,
-                           quick_memo=[fake_memo],
+        fake_user_1.update(quick_memo=[fake_memo],
                            todo=[fake_todo],
                            ideas=[fake_idea],
-                           my_items=[fake_item]
-                           )
-
-        fake_user_1.save()
+                           my_items=[fake_item])
 
         fake_user_log = UserLog(user=fake_user_1,
                                 ToDo=ToDoLog(),
                                 Ideas=IdeasLog())
         fake_user_log.save()
+
+        self.idea_id = fake_idea.id
+        self.todo_id = fake_todo.id
+        self.quickmemo_id = fake_memo.id
 
     def _get_tokens(self):
         response = self.request(type="mutation",
