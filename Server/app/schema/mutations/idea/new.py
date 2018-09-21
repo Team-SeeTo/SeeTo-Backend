@@ -26,8 +26,8 @@ class NewIdeaMutation(graphene.Mutation):
                         category=category)
         new_idea.save()
 
-        author.update_one(inc__point=50)
-        author.update_one(push__ideas=new_idea)
+        author.update(inc__point=50)
+        author.update(push__ideas=new_idea)
 
         # TODO: User Log 남기는 기능은 함수로 따로 빼자
 
