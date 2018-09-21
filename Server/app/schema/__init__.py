@@ -1,5 +1,6 @@
 import graphene
 from flask_graphql import GraphQLView
+from flask import redirect
 
 from app.schema.fields import ResponseMessageField
 from app.schema.mutations import Mutation
@@ -19,4 +20,9 @@ class Schema:
             '/graphql',
             view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=app.config['GRAPHIQL'])
         )
+
+        @app.route('/')
+        def to_graphql():
+            return redirect('/graphql')
+
         print('[INFO] GraphQLView was successfully added with GraphiQL:{0}'.format(app.config['GRAPHIQL']))
