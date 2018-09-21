@@ -17,7 +17,7 @@ class NewCommentMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, id, comment):
-        user = User.objects(email=get_jwt_identity())
+        user = User.objects(email=get_jwt_identity()).first()
 
         idea = Idea.objects(id=id).first()
 
@@ -30,7 +30,7 @@ class NewCommentMutation(graphene.Mutation):
             return NewCommentMutation(result=ResponseMessageField(is_success=False,
                                                                   message=str(e)))
 
-        user.update_one(inc__point=10)
+        user.update(inc__point=10)
 
         # User Log 남기는 기능은 함수로 따로 빼자
 
