@@ -11,7 +11,7 @@ def resolve_ideas(root, info, **kwargs):
     view_id = kwargs.get('view', None)
     start_rank = kwargs.get('start_rank', 1) - 1
 
-    if view_id is not None:
+    if (view_id is not None) and (view_id != ""):
         idea = Idea.objects(id=view_id).first()
 
         if idea is None:
@@ -23,7 +23,9 @@ def resolve_ideas(root, info, **kwargs):
                            body=idea.body,
                            created_at=idea.created_at,
                            upvoter=len([v.username for v in idea.upvoter]),
-                           comments=CommentResultField(comment_count=len(idea.comments), comments=[CommentField(author=c.author.username, body=c.body) for c in idea.comments]),
+                           comments=CommentResultField(comment_count=len(idea.comments),
+                                                       comments=[CommentField(author=c.author.username, body=c.body)
+                                                                 for c in idea.comments]),
                            category=idea.category)]
 
     ideas = Idea.objects[start_rank: start_rank + 30].order_by('point')
@@ -40,5 +42,7 @@ def resolve_ideas(root, info, **kwargs):
                        body=idea.body,
                        created_at=idea.created_at,
                        upvoter=len([v.username for v in idea.upvoter]),
-                       comments=CommentResultField(comment_count=len(idea.comments), comments=[CommentField(author=c.author.username, body=c.body) for c in idea.comments]),
+                       comments=CommentResultField(comment_count=len(idea.comments),
+                                                   comments=[CommentField(author=c.author.username, body=c.body)
+                                                             for c in idea.comments]),
                        category=idea.category) for idea in ideas]
