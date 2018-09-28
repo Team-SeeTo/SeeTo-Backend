@@ -15,8 +15,11 @@ class TestIdeas(BasicTestCase):
                                         createdAt
                                         upvoter
                                         comments{
-                                           author
-                                           body
+                                           commentCount
+                                           comments{
+                                              author
+                                              body
+                                           }
                                         }
                                     }
                                 ''')
@@ -25,7 +28,8 @@ class TestIdeas(BasicTestCase):
         self.assertEqual(type(response['ideas'][0]['title']), str)
         self.assertEqual(type(response['ideas'][0]['body']), str)
         self.assertEqual(type(response['ideas'][0]['upvoter']), int)
-        self.assertEqual(type(response['ideas'][0]['comments']), list)
+        self.assertEqual(type(response['ideas'][0]['comments']['commentCount']), int)
+        self.assertEqual(type(response['ideas'][0]['comments']['comments']), list)
 
         idea_id = response['ideas'][0]['id']
 
@@ -40,8 +44,11 @@ class TestIdeas(BasicTestCase):
                                         createdAt
                                         upvoter
                                         comments{
-                                           author
-                                           body
+                                           commentCount
+                                           comments{
+                                              author
+                                              body
+                                           }
                                         }
                                     }
                                 ''')
@@ -50,4 +57,5 @@ class TestIdeas(BasicTestCase):
         self.assertEqual(type(response['ideas'][0]['title']), str)
         self.assertEqual(type(response['ideas'][0]['body']), str)
         self.assertEqual(type(response['ideas'][0]['upvoter']), int)
-        self.assertEqual(type(response['ideas'][0]['comments']), list)
+        self.assertEqual(type(response['ideas'][0]['comments']['commentCount']), int)
+        self.assertEqual(type(response['ideas'][0]['comments']['comments']), list)
