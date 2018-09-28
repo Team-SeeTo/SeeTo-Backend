@@ -3,7 +3,7 @@ from app.schema.mutations.user.auth import AuthMutation, RefreshMutation
 from app.schema.mutations.user.register import RegisterMutation
 from app.schema.mutations.todo import NewToDoMutation
 from app.schema.mutations.quickmemo import NewQuickMemoMutation, UpdateQuickMemoMutation, DeleteQuickMemoMutation
-from app.schema.mutations.idea import NewIdeaMutation, NewCommentMutation, UpdateIdeaMutation, DeleteIdeaMutation
+from app.schema.mutations.idea import NewIdeaMutation, NewCommentMutation, UpdateIdeaMutation, DeleteIdeaMutation, VoteIdeaMutation
 from app.schema.mutations.store import BuyItemMutation
 
 
@@ -19,7 +19,10 @@ class Mutation(graphene.ObjectType):
 
     # edit_todo = object
     edit_idea = UpdateIdeaMutation.Field()
+    vote_idea = VoteIdeaMutation.Field()
     edit_quickmemo = UpdateQuickMemoMutation.Field()
+
+    # vote_idea = object
 
     # delete_todo = object
     delete_idea = DeleteIdeaMutation.Field()
