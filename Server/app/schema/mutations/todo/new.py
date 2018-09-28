@@ -23,8 +23,11 @@ class NewToDoMutation(graphene.Mutation):
     def mutate(cls, _, info, title, milestones, type, expiration):
         user = User.objects(email=get_jwt_identity())
 
+        type_enum = {1: "INFINITY", 2: "STANDARD", 3: "HARD"}
+        type = type_enum.get(type, None)
+
         new_todo = ToDo(title=title,
-                        type=type,
+                        type=str(type),
                         milestones=[Milestone(name=m) for m in milestones],
                         expiration=expiration)
         new_todo.save()
@@ -34,5 +37,5 @@ class NewToDoMutation(graphene.Mutation):
 
         # User Log 남기는 기능은 함수로 따로 빼자
 
-        return ResponseMessageField(is_success=True,
-                                    message="Idea upload success")
+        return NewToDoMutation(ResponseMessageField(is_success=True,
+                                                    message="Idea upload success"))
