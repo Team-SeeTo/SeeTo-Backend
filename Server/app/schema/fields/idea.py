@@ -6,6 +6,11 @@ class CommentField(graphene.ObjectType):
     body = graphene.String()
 
 
+class CommentResultField(graphene.ObjectType):
+    comment_count = graphene.Int()
+    comments = graphene.List(CommentField)
+
+
 class IdeasField(graphene.ObjectType):
     id = graphene.String()
     author = graphene.String()
@@ -13,5 +18,5 @@ class IdeasField(graphene.ObjectType):
     body = graphene.String()
     created_at = graphene.DateTime()
     upvoter = graphene.Int()
-    comments = graphene.List(CommentField)
+    comments = graphene.Field(CommentResultField)
     category = graphene.String()
