@@ -63,3 +63,17 @@ class TestIdea(BasicTestCase):
 
         self.assertEqual(response['deleteIdea']['result']['message'], 'Idea delete success')
 
+    def test_vote_idea(self):
+        response = self.request(type="mutation",
+                                call='voteIdea(token: "{0}", id: "{1}")'
+                                .format(self.access_token, str(self.idea_id)),
+                                body='''
+                                     result{
+                                     ... on ResponseMessageField{
+                                     isSuccess
+                                     message
+                                     }
+                                     }
+                                     ''')
+
+        self.assertEqual(response['voteIdea']['result']['message'], 'Idea vote success')
