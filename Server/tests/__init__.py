@@ -43,7 +43,8 @@ class BasicTestCase(unittest.TestCase):
         fake_idea = Idea(title="title",
                          body="body",
                          author=fake_user_1,
-                         category="test")
+                         category="test",
+                         comments=[Comment(author=fake_user_2, body="comment test")])
 
         fake_memo = QuickMemo(title="title",
                               body="body")
