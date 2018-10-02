@@ -2,6 +2,8 @@ from mongoengine import *
 from datetime import datetime
 from enum import Enum
 
+from uuid import uuid4
+
 
 class Type(Enum):
     INFINITY = 1
@@ -10,6 +12,7 @@ class Type(Enum):
 
 
 class Milestone(EmbeddedDocument):
+    id = StringField(default=uuid4().hex)
     name = StringField(required=True)
     is_completed = BooleanField(required=True, default=False)
 
