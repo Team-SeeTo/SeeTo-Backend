@@ -21,10 +21,11 @@ def resolve_todo(root, info, **kwargs):
 
         todo = todo[0]
 
-        return [ToDoField(title=todo.title,
+        return [ToDoField(id=str(todo.id),
+                          title=todo.title,
                           type=todo.type,
                           created_at=todo.created_at,
-                          milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in
+                          milestones=[MilestoneField(id=m.id, name=m.name, is_completed=m.is_completed) for m in
                                       todo.milestones],
                           expiration=todo.expiration,
                           is_completed=todo.is_completed)]
@@ -35,9 +36,10 @@ def resolve_todo(root, info, **kwargs):
     if search is not None:
         todos = [t for t in todos if search in t.title]
 
-    return [ToDoField(title=t.title,
+    return [ToDoField(id=str(t.id),
+                      title=t.title,
                       type=t.type,
                       created_at=t.created_at,
-                      milestones=[MilestoneField(name=m.name, is_completed=m.is_completed) for m in t.milestones],
+                      milestones=[MilestoneField(id=m.id, name=m.name, is_completed=m.is_completed) for m in t.milestones],
                       expiration=t.expiration,
                       is_completed=t.is_completed) for t in todos]
