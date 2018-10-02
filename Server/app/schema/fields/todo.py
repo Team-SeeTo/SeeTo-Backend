@@ -8,11 +8,13 @@ class TypeEnum(graphene.Enum):
 
 
 class MilestoneField(graphene.ObjectType):
+    id = graphene.String()
     name = graphene.String()
     is_completed = graphene.Boolean()
 
 
 class ToDoField(graphene.ObjectType):
+    id = graphene.String()
     title = graphene.String()
     type = graphene.String()
     created_at = graphene.DateTime()
