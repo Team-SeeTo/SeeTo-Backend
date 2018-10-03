@@ -24,13 +24,23 @@ class VoteIdeaMutation(graphene.Mutation):
             return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
                                                                 message="Not found"))
 
-        try:
-            idea.update(push__upvoter=user)
-        except Exception as e:
-            return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
-                                                                message=str(e)))
+        if user not in idea.upvoter:
+            try:
+                idea.update(push__upvoter=user)
+            except Exception as e:
+                return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
+                                                                    message=str(e)))
+            return VoteIdeaMutation(result=ResponseMessageField(is_success=True,
+                                                                message="Vote success"))
+        elif user in idea.upvoter:
+            try:
+                idea.update(pull__upvoter=user)
+            except Exception as e:
+                return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
+                                                                    message=str(e)))
 
-        # TODO: User Log 남기는 기능은 함수로 따로 빼자
+            # TODO: User Log 남기는 기능은 함수로 따로 빼자
 
-        return VoteIdeaMutation(result=ResponseMessageField(is_success=True,
-                                                            message="Idea vote success"))
+            return VoteIdeaMutation(result=ResponseMessageField(is_success=True,
+                                                                message="Vote cancel success"))
+
