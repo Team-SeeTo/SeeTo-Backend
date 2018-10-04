@@ -5,29 +5,29 @@ from flask_graphql_auth import AuthInfoField
 
 class IdeasUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, IdeasField)
+        types = (ResponseMessageField, AuthInfoField, IdeasField)
 
 
 class ProfileUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, ProfileField)
+        types = (ResponseMessageField, AuthInfoField, ProfileField)
 
 
 class ToDoUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, ToDoField)
+        types = (ResponseMessageField, AuthInfoField, ToDoField)
 
 
 class QuickMemoUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, QuickMemoField)
+        types = (ResponseMessageField, AuthInfoField, QuickMemoField)
 
 
 class TimeLineUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, TimeLineField)
+        types = (ResponseMessageField, AuthInfoField, TimeLineField)
 
 
 class LeaderboardsUnion(graphene.Union):
     class Meta:
-        types = (AuthInfoField, LeaderboardsField)
+        types = (ResponseMessageField, AuthInfoField, LeaderboardsField)

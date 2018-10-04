@@ -17,7 +17,7 @@ class UpdateToDoMutation(graphene.Mutation):
 
     @classmethod
     @mutation_jwt_required
-    def mutate(cls, _, info, id, new_title):
+    def mutate(cls, _, info, id, title):
         user = User.objects(email=get_jwt_identity()).first()
 
         todo = [todo for todo in user.todo if str(todo.id) == id]
@@ -28,7 +28,7 @@ class UpdateToDoMutation(graphene.Mutation):
         todo = todo[0]
 
         try:
-            todo.update(set__title=new_title)
+            todo.update(set__title=title)
         except Exception as e:
             return UpdateToDoMutation(ResponseMessageField(is_success=False, message=str(e)))
 
