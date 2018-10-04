@@ -22,17 +22,16 @@ class Mutation(graphene.ObjectType):
     vote_idea = VoteIdeaMutation.Field()
     edit_quickmemo = UpdateQuickMemoMutation.Field()
 
-    # vote_idea = object
-
     delete_todo = DeleteToDoMutation.Field()
     delete_idea = DeleteIdeaMutation.Field()
     delete_quickmemo = DeleteQuickMemoMutation.Field()
 
     # check_milestone = object
     # delete_milestone = object
+    # new_milestone = object
 
     buy_item = BuyItemMutation.Field()
-    # spent_item = object
+    # use_item = object
 
 
 
