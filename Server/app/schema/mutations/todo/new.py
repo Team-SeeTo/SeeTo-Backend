@@ -38,4 +38,4 @@ class NewToDoMutation(graphene.Mutation):
         # User Log 남기는 기능은 함수로 따로 빼자
 
         return NewToDoMutation(ResponseMessageField(is_success=True,
-                                                    message="Idea upload success"))
+                                                    message="Todo upload success"))
