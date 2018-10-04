@@ -18,5 +18,6 @@ class IdeasField(graphene.ObjectType):
     body = graphene.String()
     created_at = graphene.DateTime()
     upvoter = graphene.Int()
+    vote_checked = graphene.Boolean()
     comments = graphene.Field(CommentResultField)
     category = graphene.String()
