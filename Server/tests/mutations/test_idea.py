@@ -76,7 +76,7 @@ class TestIdea(BasicTestCase):
                                      }
                                      ''')
 
-        self.assertEqual(response['voteIdea']['result']['message'], 'Vote success')
+        self.assertEqual(response['voteIdea']['result']['message'], 'Vote cancel success')
 
     def test_vote_cancel_idea(self):
         self.request(type="mutation",
@@ -103,4 +103,4 @@ class TestIdea(BasicTestCase):
                                      }
                                      ''')
 
-        self.assertEqual(response['voteIdea']['result']['message'], 'Vote cancel success')
+        self.assertEqual(response['voteIdea']['result']['message'], 'Vote success')

@@ -1,6 +1,8 @@
 from .mutations.test_register import *
 from .mutations.test_auth import *
 from .mutations.test_idea import *
+from .mutations.test_todo import *
+from .mutations.test_quickmemo import *
 
 from .queries.test_profile import *
 from .queries.test_ideas import *
