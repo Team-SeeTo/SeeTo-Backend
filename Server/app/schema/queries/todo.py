@@ -31,7 +31,10 @@ def resolve_todo(root, info, **kwargs):
                           is_completed=todo.is_completed)]
 
     if order is not None:
-        todos.sort(key=lambda todo: todo[order])
+        try:
+            todos.sort(key=lambda todo: todo[order])
+        except:
+            return [ResponseMessageField(is_success=False, message="Invalid option")]
 
     if search is not None:
         todos = [t for t in todos if search in t.title]
