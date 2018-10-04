@@ -14,6 +14,7 @@ class TestIdeas(BasicTestCase):
                                         body
                                         createdAt
                                         upvoter
+                                        voteChecked
                                         comments{
                                            commentCount
                                            comments{
@@ -28,6 +29,7 @@ class TestIdeas(BasicTestCase):
         self.assertEqual(type(response['ideas'][0]['title']), str)
         self.assertEqual(type(response['ideas'][0]['body']), str)
         self.assertEqual(type(response['ideas'][0]['upvoter']), int)
+        self.assertEqual(response['ideas'][0]['upvoter'], True)
         self.assertEqual(type(response['ideas'][0]['comments']['commentCount']), int)
         self.assertEqual(type(response['ideas'][0]['comments']['comments']), list)
 
@@ -43,6 +45,7 @@ class TestIdeas(BasicTestCase):
                                         body
                                         createdAt
                                         upvoter
+                                        voteChecked
                                         comments{
                                            commentCount
                                            comments{
@@ -57,5 +60,6 @@ class TestIdeas(BasicTestCase):
         self.assertEqual(type(response['ideas'][0]['title']), str)
         self.assertEqual(type(response['ideas'][0]['body']), str)
         self.assertEqual(type(response['ideas'][0]['upvoter']), int)
+        self.assertEqual(response['ideas'][0]['upvoter'], True)
         self.assertEqual(type(response['ideas'][0]['comments']['commentCount']), int)
         self.assertEqual(type(response['ideas'][0]['comments']['comments']), list)

@@ -1,7 +1,7 @@
 from app.models import Idea
 from app.schema.fields import IdeasField, CommentField, ResponseMessageField, CommentResultField
 
-from flask_graphql_auth import query_jwt_required
+from flask_graphql_auth import query_jwt_required, get_jwt_identity
 
 
 @query_jwt_required
@@ -23,6 +23,7 @@ def resolve_ideas(root, info, **kwargs):
                            body=idea.body,
                            created_at=idea.created_at,
                            upvoter=len([v.username for v in idea.upvoter]),
+                           vote_checked=True if True in [True for v in idea.upvoter if v.email == get_jwt_identity()] else False,
                            comments=CommentResultField(comment_count=len(idea.comments),
                                                        comments=[CommentField(author=c.author.username, body=c.body)
                                                                  for c in idea.comments]),
@@ -42,6 +43,7 @@ def resolve_ideas(root, info, **kwargs):
                        body=idea.body,
                        created_at=idea.created_at,
                        upvoter=len([v.username for v in idea.upvoter]),
+                       vote_checked=True if True in [True for v in idea.upvoter if v.email == get_jwt_identity()] else False,
                        comments=CommentResultField(comment_count=len(idea.comments),
                                                    comments=[CommentField(author=c.author.username, body=c.body)
                                                              for c in idea.comments]),
