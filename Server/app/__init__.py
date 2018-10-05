@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from app.schema import Schema
 from flask_graphql_auth import GraphQLAuth
 
@@ -17,5 +17,15 @@ def create_app(*config_cls):
     GraphQLAuth().init_app(app_)
     Schema().init_app(app_)
     Mongo(app_)
+
+
+    @app_.after_request
+    def logger_ar(response):
+        print("\n\n\n\n==========REQUEST LOG===============")
+        print(request.data)
+        print(request.headers)
+        print("==========RESPONSE LOG===============")
+        print(response.json)
+        return response
 
     return app_
