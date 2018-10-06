@@ -1,7 +1,7 @@
 import graphene
 from flask_graphql_auth import mutation_jwt_required, get_jwt_identity
 
-from app.models import User
+from app.models import User, ToDo
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
@@ -16,17 +16,14 @@ class DeleteToDoMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, id):
-        user = User.objects(email=get_jwt_identity()).first()
+        todo = ToDo.objects(id=id).first()
+        user = User.objects(email=get_jwt_identity(), todo=todo).first()
 
-        todo = [todo for todo in user.todo if str(todo.id) == id]
-
-        if todo == []:
+        if user is None:
             return DeleteToDoMutation(result=ResponseMessageField(is_success=False,
                                                                   message="Not found"))
-
-        todo = todo[0]
-
         try:
+            user.update(pull__todo=todo)
             todo.delete()
         except Exception as e:
             return DeleteToDoMutation(result=ResponseMessageField(is_success=False,

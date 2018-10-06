@@ -11,24 +11,20 @@ class UpdateToDoMutation(graphene.Mutation):
         token = graphene.String()
         id = graphene.String()
         new_title = graphene.String()
-        new_expiration = graphene.String()
 
     result = graphene.Field(ResponseUnion)
 
     @classmethod
     @mutation_jwt_required
-    def mutate(cls, _, info, id, title):
-        user = User.objects(email=get_jwt_identity()).first()
+    def mutate(cls, _, info, id, new_title):
+        todo = ToDo.objects(id=id).first()
+        user = User.objects(email=get_jwt_identity(), todo=todo).first()
 
-        todo = [todo for todo in user.todo if str(todo.id) == id]
-
-        if todo == []:
+        if user is None:
             return UpdateToDoMutation(ResponseMessageField(is_success=False, message="Not Found"))
 
-        todo = todo[0]
-
         try:
-            todo.update(set__title=title)
+            todo.update(set__title=new_title)
         except Exception as e:
             return UpdateToDoMutation(ResponseMessageField(is_success=False, message=str(e)))
 
