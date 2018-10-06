@@ -1,7 +1,7 @@
 import graphene
 from app.schema.mutations.user.auth import AuthMutation, RefreshMutation
 from app.schema.mutations.user.register import RegisterMutation
-from app.schema.mutations.todo import NewToDoMutation, UpdateToDoMutation, DeleteToDoMutation, \
+from app.schema.mutations.todo import NewToDoMutation, UpdateToDoMutation, DeleteToDoMutation, CompleteToDoMutation,\
     DeleteMilestoneMutation, CompleteMilestoneMutation, AppendMilestoneMutation
 from app.schema.mutations.quickmemo import NewQuickMemoMutation, UpdateQuickMemoMutation, DeleteQuickMemoMutation
 from app.schema.mutations.idea import NewIdeaMutation, NewCommentMutation, UpdateIdeaMutation, DeleteIdeaMutation, VoteIdeaMutation
@@ -30,6 +30,8 @@ class Mutation(graphene.ObjectType):
     complete_milestone = CompleteMilestoneMutation.Field()
     delete_milestone = DeleteMilestoneMutation.Field()
     append_milestone = AppendMilestoneMutation.Field()
+
+    complete_todo = CompleteToDoMutation.Field()
 
     buy_item = BuyItemMutation.Field()
     # use_item = object
