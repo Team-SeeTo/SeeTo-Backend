@@ -47,3 +47,18 @@ class TestToDo(BasicTestCase):
                                       ''')
 
         self.assertEqual(response['deleteTodo']['result']['message'], 'Todo delete success')
+
+    def test_complete_todo(self):
+        response = self.request(type="mutation",
+                                call='completeTodo(token: "{0}", id: "{1}")'
+                                .format(self.access_token, str(self.todo_id)),
+                                body='''
+                                      result{
+                                      ... on ResponseMessageField{
+                                      isSuccess
+                                      message
+                                      }
+                                      }
+                                      ''')
+
+        self.assertEqual(response['completeTodo']['result']['message'], 'Todo complete success')
