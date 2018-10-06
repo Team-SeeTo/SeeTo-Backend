@@ -76,6 +76,7 @@ class BasicTestCase(unittest.TestCase):
 
         self.idea_id = fake_idea.id
         self.todo_id = fake_todo.id
+        self.milestone_id = fake_todo.milestones[0].id
         self.quickmemo_id = fake_memo.id
 
     def _get_tokens(self):
