@@ -1,7 +1,8 @@
 import graphene
 from app.schema.mutations.user.auth import AuthMutation, RefreshMutation
 from app.schema.mutations.user.register import RegisterMutation
-from app.schema.mutations.todo import NewToDoMutation, UpdateToDoMutation, DeleteToDoMutation
+from app.schema.mutations.todo import NewToDoMutation, UpdateToDoMutation, DeleteToDoMutation, \
+    DeleteMilestoneMutation, CompleteMilestoneMutation, AppendMilestoneMutation
 from app.schema.mutations.quickmemo import NewQuickMemoMutation, UpdateQuickMemoMutation, DeleteQuickMemoMutation
 from app.schema.mutations.idea import NewIdeaMutation, NewCommentMutation, UpdateIdeaMutation, DeleteIdeaMutation, VoteIdeaMutation
 from app.schema.mutations.store import BuyItemMutation
@@ -26,9 +27,9 @@ class Mutation(graphene.ObjectType):
     delete_idea = DeleteIdeaMutation.Field()
     delete_quickmemo = DeleteQuickMemoMutation.Field()
 
-    # check_milestone = object
-    # delete_milestone = object
-    # new_milestone = object
+    complete_milestone = CompleteMilestoneMutation.Field()
+    delete_milestone = DeleteMilestoneMutation.Field()
+    append_milestone = AppendMilestoneMutation.Field()
 
     buy_item = BuyItemMutation.Field()
     # use_item = object
