@@ -33,7 +33,7 @@ class TestToDo(BasicTestCase):
 
         self.assertEqual(response['editTodo']['result']['message'], 'Todo update success')
 
-    def test_delete_memo(self):
+    def test_delete_todo(self):
         response = self.request(type="mutation",
                                 call='deleteTodo(token: "{0}", id: "{1}")'
                                 .format(self.access_token, str(self.todo_id)),
