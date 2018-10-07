@@ -5,6 +5,8 @@ from app.models import User, Idea
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import idea_activity_logger
+
 
 class NewIdeaMutation(graphene.Mutation):
     class Arguments(object):
@@ -29,7 +31,7 @@ class NewIdeaMutation(graphene.Mutation):
         author.update(inc__point=50)
         author.update(push__ideas=new_idea)
 
-        # TODO: User Log 남기는 기능은 함수로 따로 빼자
+        idea_activity_logger(user=author, type="new")
 
         return NewIdeaMutation(result=ResponseMessageField(is_success=True,
                                                            message="Idea upload success"))

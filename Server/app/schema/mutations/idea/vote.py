@@ -5,6 +5,8 @@ from app.models import User, Idea
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import idea_activity_logger
+
 
 class VoteIdeaMutation(graphene.Mutation):
     class Arguments(object):
@@ -30,6 +32,9 @@ class VoteIdeaMutation(graphene.Mutation):
             except Exception as e:
                 return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
                                                                     message=str(e)))
+
+            idea_activity_logger(user=user, type="vote")
+
             return VoteIdeaMutation(result=ResponseMessageField(is_success=True,
                                                                 message="Vote success"))
         elif user in idea.upvoter:
@@ -38,8 +43,6 @@ class VoteIdeaMutation(graphene.Mutation):
             except Exception as e:
                 return VoteIdeaMutation(result=ResponseMessageField(is_success=False,
                                                                     message=str(e)))
-
-            # TODO: User Log 남기는 기능은 함수로 따로 빼자
 
             return VoteIdeaMutation(result=ResponseMessageField(is_success=True,
                                                                 message="Vote cancel success"))

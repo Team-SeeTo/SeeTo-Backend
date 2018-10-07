@@ -5,6 +5,8 @@ from app.models import User, Idea, Comment
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import idea_activity_logger
+
 
 class NewCommentMutation(graphene.Mutation):
     class Arguments(object):
@@ -32,7 +34,7 @@ class NewCommentMutation(graphene.Mutation):
 
         user.update(inc__point=10)
 
-        # User Log 남기는 기능은 함수로 따로 빼자
+        idea_activity_logger(user=user, type="comment")
 
         return NewCommentMutation(ResponseMessageField(is_success=True,
                                                        message="Comment upload success"))
