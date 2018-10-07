@@ -5,6 +5,9 @@ from app.models import User, ToDo, Milestone, Type
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import todo_activity_logger
+
+
 TypeEnum = graphene.Enum.from_enum(Type)
 
 
@@ -35,7 +38,7 @@ class NewToDoMutation(graphene.Mutation):
         user.update_one(inc__point=30)
         user.update_one(push__todo=new_todo)
 
-        # User Log 남기는 기능은 함수로 따로 빼자
+        todo_activity_logger(user=user, type="new")
 
         return NewToDoMutation(ResponseMessageField(is_success=True,
                                                     message="Todo upload success"))

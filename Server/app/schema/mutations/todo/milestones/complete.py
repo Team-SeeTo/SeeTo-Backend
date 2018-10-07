@@ -5,6 +5,8 @@ from app.models import User, ToDo
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import todo_activity_logger
+
 
 class CompleteMilestoneMutation(graphene.Mutation):
     class Arguments(object):
@@ -28,6 +30,8 @@ class CompleteMilestoneMutation(graphene.Mutation):
         except Exception as e:
             return CompleteMilestoneMutation(result=ResponseMessageField(is_success=False,
                                                                          message=str(e)))
+
+        todo_activity_logger(user=user, type="milestone")
 
         return CompleteMilestoneMutation(result=ResponseMessageField(is_success=True,
                                                                      message="Milestone complete success"))

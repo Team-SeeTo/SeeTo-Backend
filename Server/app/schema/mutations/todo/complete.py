@@ -5,6 +5,8 @@ from app.models import User, ToDo, Milestone, Type
 from app.schema.unions import ResponseUnion
 from app.schema.fields import ResponseMessageField
 
+from app.schema.utils import todo_activity_logger
+
 
 class CompleteToDoMutation(graphene.Mutation):
     class Arguments(object):
@@ -27,7 +29,7 @@ class CompleteToDoMutation(graphene.Mutation):
         except Exception as e:
             return CompleteToDoMutation(ResponseMessageField(is_success=False, message=str(e)))
 
-        # TODO: User Log 남기는 기능은 함수로 따로 빼자
+        todo_activity_logger(user=user, type="todo")
 
         return CompleteToDoMutation(ResponseMessageField(is_success=True,
                                                          message="Todo complete success"))
