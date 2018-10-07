@@ -33,6 +33,11 @@ class IdeasLog(EmbeddedDocument):
 
 class UserLog(Document):
     user = ReferenceField(document_type=User, required=True)
-    date = DateTimeField(required=True, default=datetime.now)
-    ToDo = EmbeddedDocumentField(document_type=ToDoLog, required=True, default=IdeasLog())
-    Ideas = EmbeddedDocumentField(document_type=IdeasLog, required=True, default=IdeasLog())
+    date = DateTimeField(required=True)
+    todo = EmbeddedDocumentField(document_type=ToDoLog, required=True, default=ToDoLog)
+    idea = EmbeddedDocumentField(document_type=IdeasLog, required=True, default=IdeasLog)
+
+    def save(self, *args, **kwargs):
+        if not self.date:
+            self.date = datetime.now().date()
+        return super(UserLog, self).save(*args, **kwargs)
