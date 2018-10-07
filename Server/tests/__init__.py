@@ -69,11 +69,6 @@ class BasicTestCase(unittest.TestCase):
                            ideas=[fake_idea],
                            my_items=[fake_item])
 
-        fake_user_log = UserLog(user=fake_user_1,
-                                ToDo=ToDoLog(),
-                                Ideas=IdeasLog())
-        fake_user_log.save()
-
         self.idea_id = fake_idea.id
         self.todo_id = fake_todo.id
         self.milestone_id = fake_todo.milestones[0].id
