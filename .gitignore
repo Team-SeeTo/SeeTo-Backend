@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+*.xml
+*.iml
+Server/tests/mutations/user/.pytest_cache/v/cache/nodeids
+Server/tests/mutations/user/.pytest_cache/v/cache/lastfailed
+Server/tests/mutations/user/.pytest_cache/README.md
