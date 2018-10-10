@@ -32,6 +32,8 @@ class IdeasLog(EmbeddedDocument):
 
 
 class UserLog(Document):
+    meta = {'collection': 'log'}
+
     user = ReferenceField(document_type=User, required=True)
     date = DateTimeField(required=True)
     todo = EmbeddedDocumentField(document_type=ToDoLog, required=True, default=ToDoLog)
