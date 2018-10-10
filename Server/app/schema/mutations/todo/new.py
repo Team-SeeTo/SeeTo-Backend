@@ -1,4 +1,5 @@
 import graphene
+from uuid import uuid4
 from flask_graphql_auth import mutation_jwt_required, get_jwt_identity, AuthInfoField
 
 from app.models import User, ToDo, Milestone, Type
@@ -31,7 +32,7 @@ class NewToDoMutation(graphene.Mutation):
 
         new_todo = ToDo(title=title,
                         type=str(type),
-                        milestones=[Milestone(name=m) for m in milestones],
+                        milestones=[Milestone(id=uuid4().hex, name=m) for m in milestones],
                         expiration=expiration)
         new_todo.save()
 

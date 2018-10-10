@@ -1,4 +1,5 @@
 import graphene
+from uuid import uuid4
 from flask_graphql_auth import mutation_jwt_required, get_jwt_identity, AuthInfoField
 
 from app.models import User, ToDo, Milestone, Type
@@ -24,7 +25,7 @@ class AppendMilestoneMutation(graphene.Mutation):
             return AppendMilestoneMutation(ResponseMessageField(is_success=False, message="Not Found"))
 
         try:
-            todo.update(push__milestones=Milestone(name=new_milestone))
+            todo.update(push__milestones=Milestone(id=uuid4().hex, name=new_milestone))
         except Exception as e:
             return AppendMilestoneMutation(ResponseMessageField(is_success=False, message=str(e)))
 
