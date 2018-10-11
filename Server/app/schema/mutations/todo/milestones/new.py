@@ -18,8 +18,8 @@ class AppendMilestoneMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, id, new_milestone):
-        todo = ToDo.objects(id=id).first()
-        user = User.objects(email=get_jwt_identity(), todo=todo).first()
+        todo = ToDo.objects(id=id)
+        user = User.objects(email=get_jwt_identity(), todo=todo.first()).first()
 
         if user is None:
             return AppendMilestoneMutation(ResponseMessageField(is_success=False, message="Not Found"))
