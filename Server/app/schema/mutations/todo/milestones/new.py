@@ -18,7 +18,7 @@ class AppendMilestoneMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, id, new_milestone):
-        todo = ToDo.objects(id=id)
+        todo = ToDo.objects(id=id).first()
         user = User.objects(email=get_jwt_identity(), todo=todo).first()
 
         if user is None:
