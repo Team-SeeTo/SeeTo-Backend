@@ -19,13 +19,13 @@ def create_app(*config_cls):
     Mongo(app_)
 
 
-    @app_.after_request
-    def logger_ar(response):
-        print("\n\n\n\n==========REQUEST LOG===============")
-        print(request.data)
-        print(request.headers)
-        print("==========RESPONSE LOG===============")
-        print(response.json)
-        return response
+    # @app_.after_request
+    # def logger_ar(response):
+    #     print("\n\n\n\n==========REQUEST LOG===============")
+    #     print(request.data)
+    #     print(request.headers)
+    #     print("==========RESPONSE LOG===============")
+    #     print(response.json)
+    #     return response
 
     return app_
