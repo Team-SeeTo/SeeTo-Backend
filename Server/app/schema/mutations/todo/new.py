@@ -25,7 +25,7 @@ class NewToDoMutation(graphene.Mutation):
     @classmethod
     @mutation_jwt_required
     def mutate(cls, _, info, title, milestones, type, expiration):
-        user = User.objects(email=get_jwt_identity())
+        user = User.objects(email=get_jwt_identity()).first()
 
         type_enum = {1: "INFINITY", 2: "STANDARD", 3: "HARD"}
         type = type_enum.get(type, None)

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from config import dev
 from app import create_app
 import json
+import uuid
 
 app = create_app(dev.DevConfig)
 
@@ -55,9 +56,15 @@ class BasicTestCase(unittest.TestCase):
 
         fake_todo = ToDo(title="title",
                          milestones=[
-                             Milestone(name="milestone")
+                             Milestone(id=uuid.uuid4().hex, name="milestone")
                          ],
                          expiration=datetime.now() + timedelta(days=5))
+
+        fake_todo_1 = ToDo(title="title",
+                           milestones=[
+                               Milestone(id=uuid.uuid4().hex, name="milestone")
+                           ],
+                           expiration=datetime.now() + timedelta(days=5)).save()
 
         fake_idea.save()
         fake_item.save()
