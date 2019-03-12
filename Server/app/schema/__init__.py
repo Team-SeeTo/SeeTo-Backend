@@ -1,4 +1,3 @@
-import json
 import graphene
 from flask_graphql import GraphQLView
 from flask import redirect
@@ -21,12 +20,6 @@ class Schema:
             '/graphql',
             view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=app.config['GRAPHIQL'])
         )
-        
-        schema_json = schema.introspect()
-        
-        @app.route('/schema')
-        def schemajson():
-            return json.dump(schema_json)
 
         @app.route('/')
         def to_graphql():
