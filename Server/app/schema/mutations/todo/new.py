@@ -26,6 +26,8 @@ class NewToDoMutation(graphene.Mutation):
     @mutation_jwt_required
     def mutate(cls, _, info, title, milestones, type, expiration):
         user = User.objects(email=get_jwt_identity()).first()
+        if not user:
+            return NewToDoMutation(ResponseMessageField(is_success=False, message="User not found"))
 
         type_enum = {1: "INFINITY", 2: "STANDARD", 3: "HARD"}
         type = type_enum.get(type, None)
